@@ -1,9 +1,6 @@
 package sudoku;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -32,10 +29,10 @@ public class Sudoku {
                 updateSelectList(getOneCol(j));
                 updateSelectList(getOneSquare(i, j));
                 
-                try {
+                if (!selectList.isEmpty())
                     puzzle[i][j] = selectList.get(rand.nextInt(selectList.size()));
-                } 
-                catch (Exception e) {
+                
+                else {
                     puzzle = new int[9][9];
                     return;
                 }
