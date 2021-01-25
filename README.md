@@ -14,6 +14,7 @@ This folder contains the course outline and other general documents for this cou
 This folder contains all lectures for this course
 
 	* Review
+	* Single-dimension Array
 
 ## 3. SourceCode
 

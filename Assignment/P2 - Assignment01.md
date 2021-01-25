@@ -25,7 +25,7 @@ Write a method **int reverseNum(int num)** to reverse an integer number.
 
 ### Hint
 
-1. **You should use loop, / and %. You MUST NOT use String class at all, using anything related to String will be considered as wrong and directly get a 0 for this task.**
+1. You should use loop, / and %. You MUST NOT use String class at all, using anything related to String will be considered as wrong and directly get a 0 for this task.
 
 ### Example
 
@@ -83,7 +83,7 @@ Write a Class Address, that contains
 
   * Copy constructor
 
-  * toTitleCase(String str): converts a string to title-case, the first character of the word and the first character after each space is uppercase, while all other characters are lowercase, e.g.: "New York"
+  * toTitleCase(String str): converts a string to title-case, the first character of the word and the first character after each space is uppercase, while all other characters are lowercase, e.g.: "New York". the string does not necessary only contains two words.
 
   * equals(Address address) 
 
@@ -95,7 +95,7 @@ Write a Class Address, that contains
     ZipCode : A0A0A0                // letters in uppercase
     ```
 
-  * getter and setter: use toTitleCase() in setSteet() method to make sure the street stored as data member is in titlecase. 
+  * getter and setter: use toTitleCase() in setStreet() method to make sure the street stored as data member is in titlecase. 
 
     
 
@@ -110,7 +110,7 @@ Write a Class Student, that contains
   * fName
   * lName 
   * age
-  * addr: object of the Address class in Task 3.1
+  * address: object of the Address class in Task 3.1
   * email
 
 * **Methods**:
@@ -119,7 +119,7 @@ Write a Class Student, that contains
 
   * Constructor with only fName and lName 
 
-  * Constructor with only fName, lName, age, and addr 
+  * Constructor with only fName, lName, age, and address
 
   * Copy constructor
 
