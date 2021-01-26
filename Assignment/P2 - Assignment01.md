@@ -91,7 +91,7 @@ Write a Class Address, that contains
 
     ```java
     Street  : 123, Abc Streat       // street name must be in titlecase 
-    City    : Xxxxx                 // camel case, use toCamelcase() in step 10
+    City    : Xxxxx                 // camel case, use getter and setter: use toTitleCase()
     ZipCode : A0A0A0                // letters in uppercase
     ```
 
