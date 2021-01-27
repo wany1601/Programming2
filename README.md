@@ -6,15 +6,16 @@ This repository contains materials for Programming 2 (Java) course.
 
 This folder contains the course outline and other general documents for this course.
 
-	* Programming 2-Outline(Remote)
-	* CorrectionGuidelines
+* Programming 2-Outline(Remote)
+* CorrectionGuidelines
+* markdown-cheat-sheet
 
 ## 	2. Lecture
 
 This folder contains all lectures for this course
 
-	* Review
-	* Single-dimension Array
+* Review
+* Single-dimension Array
 
 ## 3. SourceCode
 
@@ -24,7 +25,7 @@ This folder contains all source code in the lab section for this course
 
 This folder contains documents for all assignments for this course
 
- * P2 - Assignment01
+* P2 - Assignment01
 
    
 
