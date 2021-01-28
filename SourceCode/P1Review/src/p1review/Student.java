@@ -38,13 +38,6 @@ public class Student {
         this.age = student.age;
         this.gender = student.gender;
     }
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
 
     public boolean equals(Student student) {
         return this.lname.equals(student.lname)

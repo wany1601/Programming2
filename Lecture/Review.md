@@ -210,6 +210,15 @@ Give programmers the ability to go back to the previous code
        for (int i = 0; i < str.length(); i++)
            System.out.print(str.charAt(i));
    }
+   
+   // for loop with special increament
+   for (int i = 0; i < str.length(); i += 2)
+   
+   // for loop with no initialization
+   for (; num < str.length(); i += 2)
+       
+   // for loop with two initialization
+   for (int i = 0; num < str.length(); i += 2)
    ```
 
    

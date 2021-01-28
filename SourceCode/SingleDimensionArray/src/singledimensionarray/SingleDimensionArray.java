@@ -46,7 +46,7 @@ public class SingleDimensionArray {
         // 1. using ==
         System.out.println(nums4 == nums5); // comparing the reference -> false
         // 2. using Arrays.equals()
-        System.out.println(Arrays.equals(nums4, nums5)); // comparing the elements
+        System.out.println(Arrays.equals(nums4, nums5)); // comparing the elements -> true
         
         // shallow copy VS deep copy
         int[] nums6 = {1, 2, 3};
@@ -65,7 +65,7 @@ public class SingleDimensionArray {
         int[] nums11 = Arrays.copyOfRange(nums6, 1, 2); // {}
         System.out.println(Arrays.toString(nums11));
         
-        // Sort an array
+        // sort an array
         int[] nums12 = {1, 6, 3, -2, 5, 0};
         int[] nums12Copy = Arrays.copyOf(nums12, nums12.length);
         // void method, direclty modify the entire original array, ascendingly
@@ -74,6 +74,21 @@ public class SingleDimensionArray {
         // void method, direclty modify part of the original array, ascendingly
         Arrays.sort(nums12Copy, 1, 4);
         System.out.println(Arrays.toString(nums12Copy));
+        
+        // fill an array with a specific value
+        int[] nums13 = {1, 1, 1};
+        Arrays.fill(nums13, 2);
+        System.out.println(Arrays.toString(nums13));
+        
+        // modify an array
+        int[] nums14 = {1, 2, 3};
+        // using enhanced-for (WILL NOT work)
+        for (int num : nums14)
+            num++;      // num = num + 1
+        // using regular-for (WILL work)
+        for (int i = 0; i < nums14.length; i++)
+            nums14[i]++;
+        System.out.println(Arrays.toString(nums14));
     }
     
     /**
@@ -91,10 +106,10 @@ public class SingleDimensionArray {
     
     /**
      * Removes an element at a specific location from an array
+     * Example: {1,2,3,4,5,6,7} 2 -> {1,2,4,5,6,7}
      * @param nums the original array
      * @param idx the index of the element about to remove
      * @return a new array with one specific element deleted
-     * {1,2,3,4,5,6,7} 2 -> {1,2,4,5,6,7}
      */
     public static double[] remove(double[] nums, int idx) {
         // solution 1: create an empty array and use a for loop to init the 
@@ -133,6 +148,37 @@ public class SingleDimensionArray {
             str2 += str.charAt(i);
 
         return str2;
+    }
+    
+    /**
+     * Creates an array in which each element is the reciprocal of the element 
+     * in the original array (You have to use Arrays.fill())
+     * Example: {1, 2, 3} -> {1, 0.5, 0.3}
+     * @param nums the original array           
+     * @return new reciprocal array             
+     */
+    public static double[] reciprocal(double[] nums) {
+        double[] nums2 = new double[nums.length];            //{0,0,0}
+        Arrays.fill(nums2, 1);               // {1,1,1}
+       
+        for (int i = 0; i < nums2.length; i++)
+            nums2[i] /= nums[i];         // nums2[i] = nums2[i] / nums[i];
+       
+        return nums2;
+    }
+    
+    /**
+     * Calculates the sum of an array
+     * @param nums the input array
+     * @return the sum of the array
+     */
+    public static double sum(double[] nums) {
+        double sum = 0;
+        
+        for (double num : nums)
+            sum += num;
+        
+        return sum;
     }
     
 }

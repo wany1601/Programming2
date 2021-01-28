@@ -125,7 +125,7 @@ Object takes two pieces of memory, which creates some problems when we use it, f
    Usually we can use the copy constructor (or `clone()`) to implement deep copy. For array, there are two methods we can directly use:
 
    	1. `Arrays.copyOf()`: deep copy an array, **from the first element to a specific element**. 
-    	2. `Arrays.copyOfRange()`: deep copy an array, **from a specific element to another specific element**.
+   	2. `Arrays.copyOfRange()`: deep copy an array, **from a specific element to another specific element**.
 
    ```java
    // deep copy
@@ -158,15 +158,21 @@ Object takes two pieces of memory, which creates some problems when we use it, f
    Arrays.sort(nums12Copy, 1, 4);
    ```
 
-   
+5. fill all elements in an array with a new specific value
+
+   ```java
+   int[] nums = {0, 0, 0};
+   // fill() will directly modify the original array
+   Arrays.fill(nums, 1);   	// {1, 1, 1}
+   ```
+
+     
 
 ## 5. Enhanced-for loop
 
-There is another kind of loop we can use when we deal with collections (not including String), which is called the **enhanced-for** loop (or **for-each** loop).
+### 5.1 What is enhanced-for loop
 
 In a regular for loop we have to create and control an index to visit elements in a collection. But the fact is that, we only care about the values of the elements in the collection most of the time, not the value of the index.
-
-The idea of using an enhanced-for loop is to go through a collection without using any index.
 
 ```java
 // Regualr for loop for a String. String only supports regular for loop
@@ -174,17 +180,56 @@ String str = "hello";
 
 for (int i = 0; i < str.length(); i++)
     System.out.print(str.charAt(i));
+```
 
+There is another kind of loop we can use when we deal with collections (not including String), which is called the **enhanced-for** loop (or **for-each** loop). The idea of using an **enhanced-for** loop is to **go through a collection without using any index**.
+
+### 5.2 Comparison between **regular for** loop and **enhanced for** loop
+
+| -                  | Regular for                                                  | Enhanced for                                                 |
+| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| index              | uses index system                                            | no index system                                              |
+| writing difficulty | more difficult to write                                      | easier to write                                              |
+| features           | can customize the index, so can go through the collection with a specific rule | cannot customize the index, can only go through the collection from the 1st element to the last element |
+| local variable     | most of time, you create `int i`                             | the data type of the variable is the same as the data type of the array , and that's the reason you should name any array plural. |
+| read as            |                                                              | for (double num : nums) can be read as "*for each num in nums*" |
+| reading            | √                                                            | √                                                            |
+| writing            | √                                                            | ×                                                            |
+
+### 5.3 Using enhanced-for loop to read elements
+
+Enhanced-for **can be used to go through a collection and read each of its element** without an index.
+
+
+```java
 // Array can support both regular for loop and enhanced-for loop
-double[] nums = {1.1, 2.2, 3.3, 4.4};
+double[] num = {1.1, 2.2, 3.3, 4.4};
 
 // Regular for loop for an array
-for (int i = 0; i < nums.length; i++)
+for (int i = 1; i < nums.length - 1; i += 2)
     System.out.print(nums[i]);
 
 // Enhance for loop for any array
 for (double num : nums)
     System.out.print(num);
+```
+
+### 5.4 Using enhanced-for loop to modify elements
+
+Enhanced-for **CANNOT be used to go through a collection and modify each element of a collection**, since the modification will only be applied on the local variable instead of the real collection.
+
+```java
+int[] nums = {1, 2, 3};
+
+// increase values of elements in an array by using enhanced-for loop
+// won't work, nums will still be {1, 2, 3}
+for (int num : nums)
+   num++;      				// num is a local variable, it will not affect the array
+
+// increase values of elements in an array by using regular for loop
+// will work, nums will be {2, 3, 4}
+for (int i = 0; i < nums.length; i++)
+    nums[i]++;				// changes applied on nums
 ```
 
 
