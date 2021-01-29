@@ -6,7 +6,7 @@ Jan-30 23:57:00. **Late submission will directly be marked as 0**.
 
 ## **Submission:**
 
-**Please submit one .java file for each task (****4 .java files in total****, Omnivox accepts multi-submission)**. **Do not zip your files**.
+**Please submit one .java file for task 1 and 2, one .java file for Address class, one .java file for Student class (3 .java files in total, Omnivox accepts multi-submission). DO NOT zip your files**.
 
 **Full Score**: 100
 
