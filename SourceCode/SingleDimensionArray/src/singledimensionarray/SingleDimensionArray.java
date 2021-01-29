@@ -89,6 +89,11 @@ public class SingleDimensionArray {
         for (int i = 0; i < nums14.length; i++)
             nums14[i]++;
         System.out.println(Arrays.toString(nums14));
+        
+        // call the addValue()
+        double[] nums15 = {1, 2, 3};
+        addValue(nums15, 3);
+        System.out.println(Arrays.toString(nums15));
     }
     
     /**
@@ -159,7 +164,7 @@ public class SingleDimensionArray {
      */
     public static double[] reciprocal(double[] nums) {
         double[] nums2 = new double[nums.length];            //{0,0,0}
-        Arrays.fill(nums2, 1);               // {1,1,1}
+        Arrays.fill(nums2, 1);                               // {1,1,1}
        
         for (int i = 0; i < nums2.length; i++)
             nums2[i] /= nums[i];         // nums2[i] = nums2[i] / nums[i];
@@ -181,4 +186,75 @@ public class SingleDimensionArray {
         return sum;
     }
     
+    /**
+     * Adds a specific value to each element of an array, directly modify 
+     * the original array
+     * @param nums the input array
+     * @param value the specific value
+     */
+    public static void addValue(double[] nums, double value) {
+        for (int i = 0 ; i < nums.length; i++)
+            nums[i] += value;
+    }
+    
+    /**
+     * Counts the number of odd numbers in an array
+     * Example: {1, 2, 3} -> 2
+     * @param nums the input array
+     * @return the number of odd numbers in an array
+     */
+    public static int countOddNum(int[] nums) {
+        int count = 0;
+        
+        for (int num : nums)
+            if (num % 2 == 1)
+                count++;
+        
+        return count;
+    }
+    
+    /**
+     * Adds elements in an array with odd index 
+     * Example: {4, 6, 1, 9} -> 6 + 9 -> 15
+     * @param nums the input array
+     * @return the sum of elements in an array with odd index 
+     */
+    public static double sumElementsWithOddIdx(double[] nums) {
+        double sum = 0;
+        
+        // solution 1;
+        for (int i = 0; i < nums.length; i++) 
+            if (i % 2 == 1)
+                sum += nums[i];
+        
+        // solution 2;
+        for (int i = 1; i < nums.length; i += 2) 
+            sum += nums[i];
+        
+        return sum;
+    }
+    
+    /**
+     * Add elements of an double array if at the same position, the boolean 
+     * array has a value of true, if the two array have different size, 
+     * calculate the sum based on the short one.
+     * Example: {1, 2, 3, 4, 5} {true, false, true} -> 4
+     *           {1, 2, 3} {true, false, true, true, true} -> 4
+     * @param nums the number array
+     * @param flags the boolean array
+     * @return the sum
+     */
+    public static double sum(double[] nums, boolean[] flags) {
+        double sum = 0;
+        int len = Math.min(nums.length, flags.length);
+        
+        // should use the regular for loop since we need the index system to 
+        // synchronize the two array
+        for (int i = 0; i < len; i++) 
+            if (flags[i])       // // do not write "flags[i] == true"
+                sum += nums[i];
+        
+        return sum;
+    }
+
 }
