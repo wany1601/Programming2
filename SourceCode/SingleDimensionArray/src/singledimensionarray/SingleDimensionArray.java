@@ -94,6 +94,16 @@ public class SingleDimensionArray {
         double[] nums15 = {1, 2, 3};
         addValue(nums15, 3);
         System.out.println(Arrays.toString(nums15));
+        
+        // convert a string to a char array and use enhanced-for to go thought it
+        String str = "hello!";
+        for (char c : str.toCharArray())
+            System.out.println(c);
+        
+        int digitCount = 0;
+        for (char c : str.toCharArray())
+            if (Character.isDigit(c))
+                digitCount++;
     }
     
     /**

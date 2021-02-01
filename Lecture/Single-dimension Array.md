@@ -164,6 +164,25 @@ int[] nums = {0, 0, 0};
 Arrays.fill(nums, 1);   	// {1, 1, 1}
 ```
 
+### 4.6 A method in String class
+
+You cannot use enhanced-for loop to go through a string, so you have to use the index system. However, you can first convert the String into a char array, then since it is an array, you can use enhanced-for to go through it:
+
+```java
+String str = "hello!";
+// convert the string into a char array and then print each element of it
+for (char c : str.toCharArray())
+    System.out.println(c);
+
+// convert the string into a char array and then count the number of digits in it
+int digitCount = 0;
+for (char c : str.toCharArray())
+    if (Character.isDigit(c))
+        digitCount++;
+```
+
+
+
 ## 5. Enhanced-for loop
 
 ### 5.1 What is enhanced-for loop
@@ -284,3 +303,47 @@ public static double sum(double[] nums, boolean[] flags) {
     return sum;
 }
 ```
+
+
+
+## 6 Array of object
+
+Array not only supports primitive data types, but also objects. The general rules are the same as the array of primitive data types.
+
+```java
+Clock[] clocks = new Clocks[3];			// {null, null, null}
+Arrays.fill(clocks, new Clock());		// fill all null by a real object
+
+Clock[] clocks2 = {new Clock(), new Clock(1, 2, 3), new Clock(2, 3 ,4)};
+
+Clock[] clocks3;
+Clock c1 = new Clock();
+Clock c2 = new Clock(8, 8, 8);
+Clock c3 = new Clock(9, 9, 9);
+clocks3 = new Clock[]{c1, c2, c3};
+```
+
+You can also use the index to visit each element inside of an object array.
+
+```java
+Clock[] clocks = {new Clock(), new Clock(1, 2, 3), new Clock(2, 3 ,4)};
+
+System.out.print(clocks[0]);				// clocks[0] is a Clock object
+clocks[0].increaseHr();						// you can use . to visit methods of the object
+```
+
+**You CAN use enhanced-for even for modifying the data member of an object in an object array**
+
+```java
+Clock[] clocks = {new Clock(), new Clock(1, 2, 3), new Clock(2, 3 ,4)};		// only the address is stored in the array
+
+// increase each clock's hour by 1
+// you CAN use enhanced-for even for modifying the data member of an object in an object array
+for (Clock clock : clocks)
+    clock.increaseHr();
+
+// the regular for loop version is much longer
+for (int i = 0; i < clocks.length; i++)
+    clocks[i].increaseJHr();
+```
+
