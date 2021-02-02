@@ -123,6 +123,10 @@ public class SingleDimensionArray {
         for (char c : str.toCharArray())
             if (Character.isDigit(c))
                 digitCount++;
+
+        double[] nums16 = {1, 2, 3};
+        nums16 = appendValue(nums16, 9);
+        System.out.println(Arrays.toString(nums16));
     }
 
     /**
@@ -304,4 +308,38 @@ public class SingleDimensionArray {
         return sum;
     }
 
+    /**
+     * Appends a new value to a double array
+     *
+     * Example: {1, 2, 3} -> {1, 2, 3, 9}
+     *
+     * @param nums the original array
+     * @param num the new value to append in the end of the array
+     */
+    //TODO: this method is modified, re-explain in the class
+    public static double[] appendValue(double[] nums, double num) {
+        double[] nums2 = Arrays.copyOf(nums, nums.length + 1);  // {1, 2, 3, 0}
+
+        nums2[nums2.length - 1] = num;              //  {1, 2, 3, 9}
+
+        return nums2;           // shallow copy
+    }
+
+    /**
+     * Convert the number of vowels in a string, you should convert the string
+     * to a char array first and then do the count.
+     *
+     * @param str the input string
+     * @return the number of vowels in the string
+     */
+    public static int countVowel(String str) {
+        int count = 0;
+        str = str.toLowerCase();
+
+        for (char c : str.toCharArray())
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+                count++;
+
+        return count;
+    }
 }
