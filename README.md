@@ -7,8 +7,9 @@ This repository contains materials for Programming 2 (Java) course.
 This folder contains the course outline and other general documents for this course.
 
 * Programming 2-Outline(Remote)
-* CorrectionGuidelines
-* markdown-cheat-sheet
+* Correction guidelines
+* Markdown cheat sheet
+* NetBeans shortcuts cheat sheet
 
 ## 	2. Lecture
 
