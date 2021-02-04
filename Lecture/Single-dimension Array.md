@@ -347,3 +347,13 @@ for (int i = 0; i < clocks.length; i++)
     clocks[i].increaseJHr();
 ```
 
+## 7 Stack VS Heap
+
+The memory can be separated into two parts:
+
+1. **stack**: every value that has a **fixed size** is stored in this part of memory. For example, 5, 3.14, double num, char c, the reference of an object etc.
+2. **heap**: **the data member of an object** is stored in the heap.
+
+When a method is finished, Java will release the stack memory related to that method immediately.  However, the heap will not be released.
+
+The heap will be kept until at one point there is not enough space to store new data, then Java will scan the heap and release some memory if it is not referenced by anything, this is called the **garbage collection**. In C++, programmers can manually release heap memories, so it can keep the minimum use of the heap. However, it may also create sericeous problems if you release something you should not release. In Java, programmers cannot manually release heap memories, suggestions can be given to Java, but still it is Java's decision if it wants to release some memories in the heap. 
