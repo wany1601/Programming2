@@ -127,6 +127,10 @@ public class SingleDimensionArray {
         double[] nums16 = {1, 2, 3};
         nums16 = appendValue(nums16, 9);
         System.out.println(Arrays.toString(nums16));
+
+        String[] strs = {"aaa", "bbb"};
+        removeCharacters(strs);
+        System.out.println(Arrays.toString(strs));
     }
 
     /**
@@ -315,8 +319,8 @@ public class SingleDimensionArray {
      *
      * @param nums the original array
      * @param num the new value to append in the end of the array
+     * @return the new array with with the appended number
      */
-    //TODO: this method is modified, re-explain in the class
     public static double[] appendValue(double[] nums, double num) {
         double[] nums2 = Arrays.copyOf(nums, nums.length + 1);  // {1, 2, 3, 0}
 
@@ -326,8 +330,8 @@ public class SingleDimensionArray {
     }
 
     /**
-     * Convert the number of vowels in a string, you should convert the string
-     * to a char array first and then do the count.
+     * Counts the number of vowels in a string, you should convert the string to
+     * a char array first and then do the count.
      *
      * @param str the input string
      * @return the number of vowels in the string
@@ -341,5 +345,66 @@ public class SingleDimensionArray {
                 count++;
 
         return count;
+    }
+
+    /**
+     * Counts the total number of vowels in a string array
+     *
+     * @param strs the input string array
+     * @return the total number of vowels in the string array 41
+     */
+    public static int countVowel(String[] strs) {
+        int count = 0;
+
+        for (String str : strs)
+            count += countVowel(str);
+
+        return count;
+    }
+
+    /**
+     * Removes the first and the last character of each String in a String
+     * array.
+     *
+     * Example: {"Hello", "world"} -> {"ell", "orl"};
+     */
+    public static void removeCharacters(String[] strs) {
+        for (int i = 0; i < strs.length; i++)
+            strs[i] = strs[i].substring(1, strs[i].length() - 1);
+    }
+
+    /**
+     * Finds the maximum values between two double arrays. Example:
+     *
+     * {1, 2, 3}, {4, 1, 0} -> {4, 2, 3}
+     *
+     * {1, 2, 3}, {4, 1, 0, 9} -> {4, 2, 3, 9}
+     *
+     * {1, 2, 3, -1}, {4, 1, 0} -> {4, 2, 3, -1}
+     *
+     * @param nums1 the first input double array
+     * @param nums2 the second input double array
+     * @return the max array
+     *
+     * xxxx
+     *
+     * yyyy|yyyyyyyyyyyyyyyyy
+     */
+    public static double[] max(double[] nums1, double[] nums2) {
+        int minLen = Math.min(nums1.length, nums2.length);
+        int maxLen = Math.max(nums1.length, nums2.length);
+
+        double[] maxNums = new double[maxLen];
+
+        // overlapping part
+        for (int i = 0; i < minLen; i++)
+            maxNums[i] = Math.max(nums1[i], nums2[i]);
+
+        // additional part
+        double[] longArray = (nums1.length > nums2.length) ? nums1 : nums2;
+        for (int i = minLen; i < maxLen; i++)
+            maxNums[i] = longArray[i];
+
+        return maxNums;
     }
 }
