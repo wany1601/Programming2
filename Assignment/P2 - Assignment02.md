@@ -32,7 +32,7 @@ Implement the following methods:
 1. `public static double sum(double[] nums)`
 2. `public static double avg(double[] nums)`
 3. `public static double min(double[] nums)`
-5. `public static void delete(double[] nums, int idx)`
+5. `public static double[] delete(double[] nums, int idx)`
     - deletes a specific element from an array
 
 ***
@@ -110,6 +110,7 @@ Write a Class `Author`, that contains
 
   * Default constructor 
 * Constructor with all data members 
+  
   * Copy constructor
 * `isNationalityValid()`
       * a nationality can only be one of `{"Canadian", "American", "French", "British", "German"}`
@@ -154,8 +155,8 @@ Write a Class `Book`, that contains
   Title:    Java Programming
 Author:   Yi Wang, Jon Snow						// only show the author's name
   Price:    $9.99
-  ```
-  
+```
+
   * getters and setters
 
 ### Task 4.3

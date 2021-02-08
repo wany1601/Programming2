@@ -32,7 +32,7 @@ enum MouthColor {
 }
 
 /**
- * A simple class of face
+ * A simple class of face (using enum to add restriction to mouthColor)
  *
  * @author Yi Wang
  */
