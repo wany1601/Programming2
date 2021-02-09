@@ -70,4 +70,143 @@ public class MultiDimensionArray {
         return sum;
     }
 
+    /**
+     * Finds the max value in a 2d array
+     *
+     * @param numss the input 2d array
+     * @return the max value in the 2d array
+     */
+    public static double max(double[][] numss) {
+        double max = Double.NEGATIVE_INFINITY;
+//        double max = Double.MIN_VALUE;
+
+        for (double[] nums : numss)
+            for (double num : nums)
+                max = Math.max(max, num);
+
+        return max;
+    }
+
+    /**
+     * Finds the max in each row of a 2d array.
+     *
+     * Example:
+     *
+     * 1 2 3
+     *
+     * 4 1 2 3
+     *
+     * 1 1 -1 0 -2
+     *
+     * -> {3, 4, 1}
+     *
+     * @param numss the input 2d array
+     * @return the max in each row of that 2d array 17
+     */
+    public static double[] maxInRow(double[][] numss) {
+        double[] maxs = new double[numss.length];      // {0, 0, 0}
+        Arrays.fill(maxs, Double.NEGATIVE_INFINITY);   // {-INF, -INF, -INF}
+
+        for (int i = 0; i < numss.length; i++)
+            for (double num : numss[i])
+                maxs[i] = Math.max(num, maxs[i]);
+
+        return maxs;
+    }
+
+    /**
+     * Calculates the average of each row of a 2d array
+     *
+     * Example:
+     *
+     * 1 2 3
+     *
+     * 4 1 2 3
+     *
+     * 1 1 -1 0 -2
+     *
+     * -> {2, 2.5, -0.2}
+     *
+     * @param numss the input 2d array
+     * @return the average of each row of the 2d array
+     */
+    public static double[] avgInRow(double[][] numss) {
+        double[] avgs = new double[numss.length];           // {0, 0, 0}
+
+        for (int i = 0; i < numss.length; i++) {
+            // sum a row
+            for (double num : numss[i])
+                avgs[i] += num;
+
+            // avg a row
+            avgs[i] /= numss[i].length;
+        }
+
+        return avgs;
+    }
+
+    /**
+     * Finds the max in each column of a 2d array.
+     *
+     * Example:
+     *
+     * 1 2 3
+     *
+     * 4 1 2 3
+     *
+     * 1 1 -1 0 -2
+     *
+     * -> {4, 2, 3, 3, -2}
+     *
+     * @param numss the input 2d array
+     * @return the max in each column of that 2d array
+     */
+    public static double[] maxInCol(double[][] numss) {
+        // find the longest row in the 2d array
+        int maxCol = 0;
+        for (double[] nums : numss)
+            maxCol = Math.max(maxCol, nums.length);
+
+        double[] maxs = new double[maxCol];      // {0, 0, 0, 0, 0}
+        Arrays.fill(maxs, Double.NEGATIVE_INFINITY);   // {-INF, -INF, -INF, -INF, -INF}
+
+        for (double[] nums : numss)
+            for (int j = 0; j < nums.length; j++)
+                maxs[j] = Math.max(nums[j], maxs[j]);
+
+        return maxs;
+    }
+
+    /**
+     * Calculates the average of each column of a 2d array
+     *
+     * Example:
+     *
+     * 1 2 3
+     *
+     * 4 1 2 3
+     *
+     * 1 1 -1 0 -2
+     *
+     * -> {2, 1.33, 1.33, 1.5, -2}
+     *
+     * @param numss the input 2d array
+     * @return the average of each column of the 2d array
+     */
+    public static double[] avgInCol(double[][] numss) {
+        // find the longest row in the 2d array
+        int maxCol = 0;
+        for (double[] nums : numss)
+            maxCol = Math.max(maxCol, nums.length);
+
+        double[] avgs = new double[maxCol];      // {0, 0, 0, 0, 0}
+
+        for (double[] nums : numss)
+            for (int j = 0; j < nums.length; j++)
+                avgs[j] += nums[j];
+
+        // TODO: figure out the number for the division
+        return avgs;
+    }
+
 }
