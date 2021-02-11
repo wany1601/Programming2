@@ -32,17 +32,6 @@ import java.util.Arrays;
 public class MultiDimensionArray {
 
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        double[][] numss = {{1, 2, 3}, {4, 5}};
-
-        increaseValue(numss, 100);
-
-        System.out.println(Arrays.deepToString(numss));
-    }
-
-    /**
      * Increases each element in the array by a specific value
      *
      * @param numss the input array
@@ -188,7 +177,11 @@ public class MultiDimensionArray {
      *
      * 1 1 -1 0 -2
      *
-     * -> {2, 1.33, 1.33, 1.5, -2}
+     * -> sum: {6, 4, 4, 3, -2}
+     *
+     * -> count: {3, 3, 3, 2, 1}
+     *
+     * -> avgs: {2, 1.33, 1.33, 1.5, -2}
      *
      * @param numss the input 2d array
      * @return the average of each column of the 2d array
@@ -199,14 +192,64 @@ public class MultiDimensionArray {
         for (double[] nums : numss)
             maxCol = Math.max(maxCol, nums.length);
 
-        double[] avgs = new double[maxCol];      // {0, 0, 0, 0, 0}
+        double[] avgs = new double[maxCol];         // {0, 0, 0, 0, 0}
+        double[] counts = new double[maxCol];       // {0, 0, 0, 0, 0}
 
         for (double[] nums : numss)
-            for (int j = 0; j < nums.length; j++)
-                avgs[j] += nums[j];
+            for (int j = 0; j < nums.length; j++) {
+                avgs[j] += nums[j];              // calc the sum
+                counts[j]++;                    // count the number of elements
+            }
 
-        // TODO: figure out the number for the division
+        // calc the real avgs
+        for (int i = 0; i < avgs.length; i++)
+            avgs[i] /= counts[i];
+
         return avgs;
     }
 
+    /**
+     * Appends a new number in the end of a specific row in a 2d array
+     *
+     * Example: {{1,2,0,0,0},{3,4}}, 5, 1 -> {{1,2,0,0,0},{3,4,5}}
+     *
+     * @param numss the input 2d array
+     * @param num the new number to append
+     * @param rowIdx the index of the row you want to append the number to
+     */
+    public static void appendNum(double[][] numss, double num, int rowIdx) {
+        double[] row = Arrays.copyOf(numss[rowIdx], numss[rowIdx].length + 1);
+        row[row.length - 1] = num;
+        numss[rowIdx] = row;
+    }
+
+    /**
+     * Appends a new row in a 2d array
+     *
+     * Example: {{1,2,0,0,0},{3,4}}, {9,9,9}, 1 -> {{1,2,0,0,0},{9,9,9},{3,4}}
+     *
+     * @param numss the input 2d array
+     * @param nums the new row to append
+     * @param idx where the new row is append to
+     */
+    public static double[][] appendRow(double[][] numss, double[] nums, int idx) {
+        double[][] numss2 = new double[numss.length + 1][];
+
+        for (int i = 0; i < idx; i++)
+            numss2[i] = numss[i];
+
+        numss2[idx] = nums;
+
+        for (int i = idx; i < numss.length; i++)
+            numss2[i + 1] = numss[i];
+
+        return numss2;
+    }
+
+    public static void main(String[] args) {
+        double[][] numss = {{1, 2, 0, 0, 0}, {3, 4}};
+        double[] nums = {9, 9, 9};
+//        appendNum(numss, 5, 1);
+        System.out.println(Arrays.deepToString(appendRow(numss, nums, 1)));
+    }
 }
