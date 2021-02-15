@@ -187,6 +187,8 @@ public class MultiDimensionArray {
      * @return the average of each column of the 2d array
      */
     public static double[] avgInCol(double[][] numss) {
+        String[] strs = {"12121", "12121", "12121", "12121", "12121", "12121",
+            "12121", "12121"};
         // find the longest row in the 2d array
         int maxCol = 0;
         for (double[] nums : numss)

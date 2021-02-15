@@ -112,7 +112,8 @@ Write a Class `Author`, that contains
 * Constructor with all data members 
   
   * Copy constructor
-* `isNationalityValid()`
+* `isNationalityValid(String nationality)`
+  
       * a nationality can only be one of `{"Canadian", "American", "French", "British", "German"}`
 * `equals()`
   * `toString()`
@@ -127,7 +128,7 @@ Email       : wangy@vaniercollege.qc.ca
   
   
   * getters and setters
-      * You should use `isNationalityValid()` in `setNationality()`
+      * You should use `isNationalityValid()` in `setNationality()` and constructor(s)
 
 ### Task 4.2
 
@@ -177,9 +178,9 @@ Write a Class `MyLibrary`, that contains
   * Copy constructor
   * `selectBook()`
     * selects a random book
-* `selectBook(int idx)`
-    * selects a book with a specific index. If `idx` is not valid, select a random book
-  * `calcTotalPrice()`
+  * `selectBook(int idx)`
+      * selects a book with a specific index. If `idx` is not valid, select a random book
+  * `int calcTotalPrice()`
     * calculate the total price of all the books in the library
   * `int countAuthorNum(String nationality)`
     * count how many authors of books in the library have that nationality, an author can be counted for more than one times
