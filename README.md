@@ -10,6 +10,7 @@ This folder contains the course outline and other general documents for this cou
 * Correction guidelines
 * Markdown cheat sheet
 * NetBeans shortcuts cheat sheet
+* NetBean-fontColor: the font color setting on my NetBeans 
 
 ## 	2. Lecture
 
