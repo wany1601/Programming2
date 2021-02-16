@@ -66,7 +66,7 @@ public class MultiDimensionArray {
      * @return the max value in the 2d array
      */
     public static double max(double[][] numss) {
-        double max = Double.NEGATIVE_INFINITY; // or Double.MIN_VALUE
+        double max = Double.NEGATIVE_INFINITY;  // or Double.MIN_VALUE
 
         for (double[] nums : numss)
             for (double num : nums)
@@ -243,8 +243,46 @@ public class MultiDimensionArray {
         return numss2;
     }
 
+    /**
+     * Generates a matrix with random numbers in range [min(bound1, bound2),
+     * max(bound1, bound2))
+     *
+     * Example: 3, 4, 2, 5 -> {{3,3,4,2},{4,2,3,4},{2,3,2,2}}
+     *
+     * @param row the number of row of the matrix
+     * @param col the number of column of the matrix
+     * @param bound1 the bound of the range
+     * @param bound2 another bound of the range
+     * @return a matrix with random numbers inside
+     */
+    public static double[][] generateRandomMatrix(int row, int col,
+            double bound1, double bound2) {
+        double[][] numss = new double[row][col];            // matrix
+        double min = Math.min(bound1, bound2);
+        double max = Math.max(bound1, bound2);          // [3.1,   5.5)
+
+        if (bound1 > bound2) {
+            double temp = bound1;
+            bound1 = bound2;
+            bound2 = temp;
+        }
+
+        for (double[] nums : numss)
+            for (int j = 0; j < col; j++)
+                // [0, 1) -> [0, 2.4) -> [3.1, 5.5)
+                nums[j] = min + Math.random() * (max - min);
+
+        return numss;
+    }
+
     public static void main(String[] args) {
         double[][] numss = {{1, 2, 0, 0, 0}, {3, 4}};
+        double[][] numss2 = {{1, 2, 0, 0, 0}, {3, 4}};
+
+        System.out.println(Arrays.deepToString(generateRandomMatrix(3, 4, 5.5, 3.1)));
+//        System.out.println(numss.equals(numss2));   // comparing the address of numss and numss2
+//        System.out.println(Arrays.equals(numss, numss2));   // comparing the address of 1d array inside of numss and numss2
+        System.out.println(Arrays.deepEquals(numss, numss2));   // comparing each double value inside of numss and numss2
         double[] nums = {9, 9, 9};
 //        appendNum(numss, 5, 1);
         System.out.println(Arrays.deepToString(insertRow(numss, nums, 1)));

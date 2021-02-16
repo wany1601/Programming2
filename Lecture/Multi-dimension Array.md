@@ -135,7 +135,10 @@ public static void increaseValue(double[][] numss, double value) {
 
 
 
+## 4 Arrays class methods
 
+1. `Arrays.deepToString()` for multi-dimension (not necessary only 2d) array
+2. `Arrays.deepEquals()` for multi-dimension array 
 
 
 
