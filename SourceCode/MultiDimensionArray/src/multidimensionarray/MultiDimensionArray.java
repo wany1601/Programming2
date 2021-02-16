@@ -66,8 +66,7 @@ public class MultiDimensionArray {
      * @return the max value in the 2d array
      */
     public static double max(double[][] numss) {
-        double max = Double.NEGATIVE_INFINITY;
-//        double max = Double.MIN_VALUE;
+        double max = Double.NEGATIVE_INFINITY; // or Double.MIN_VALUE
 
         for (double[] nums : numss)
             for (double num : nums)
@@ -224,19 +223,17 @@ public class MultiDimensionArray {
     }
 
     /**
-     * Appends a new row in a 2d array
+     * Inserts a new row in a 2d array
      *
      * Example: {{1,2,0,0,0},{3,4}}, {9,9,9}, 1 -> {{1,2,0,0,0},{9,9,9},{3,4}}
      *
      * @param numss the input 2d array
      * @param nums the new row to append
      * @param idx where the new row is append to
+     * @return the new array with the additional row inserted
      */
-    public static double[][] appendRow(double[][] numss, double[] nums, int idx) {
-        double[][] numss2 = new double[numss.length + 1][];
-
-        for (int i = 0; i < idx; i++)
-            numss2[i] = numss[i];
+    public static double[][] insertRow(double[][] numss, double[] nums, int idx) {
+        double[][] numss2 = Arrays.copyOf(numss, numss.length + 1);
 
         numss2[idx] = nums;
 
@@ -250,6 +247,6 @@ public class MultiDimensionArray {
         double[][] numss = {{1, 2, 0, 0, 0}, {3, 4}};
         double[] nums = {9, 9, 9};
 //        appendNum(numss, 5, 1);
-        System.out.println(Arrays.deepToString(appendRow(numss, nums, 1)));
+        System.out.println(Arrays.deepToString(insertRow(numss, nums, 1)));
     }
 }
