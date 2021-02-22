@@ -49,6 +49,16 @@ public class ArrayListExercises {
         // when you want to create an empty arrayList, use new constructor
         ArrayList<Integer> al2 = new ArrayList<>();          // capacity = 10, but no elements inside
         ArrayList<Integer> al3 = new ArrayList<>(100);       // capacity = 100, but no elements inside
+        al3.remove(0);                  // 0 is int, so remove the idx
+        al3.remove((Integer) 0);        // 0 is Integer, so remove the element   int 0  Integer 0
+
+        ArrayList<Double> aa = new ArrayList<>();
+        aa.remove(3);       // 3 is int, so idx
+        aa.remove(3.14);    // 3.14 is double, so value
+
+        ArrayList<String> ss = new ArrayList<>();
+        ss.remove(0);       // 0 is int, so idx
+        ss.remove("Hello"); // "Hello" is String, so value
 
         // advanced, will talk about it later in chapeter 2
         // the reference can also be List instead of ArrayList
