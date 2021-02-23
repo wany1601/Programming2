@@ -24,6 +24,8 @@
 package library;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 /**
  * A class of Library
@@ -95,6 +97,51 @@ public class Library {
         }
 
         return searchResults;
+    }
+
+    /**
+     * Counts the number of authors with a certain nationality, an author will
+     * only be counted for maximum 1 time no matter how many books the author
+     * writes
+     *
+     * @param nationality the nationality you want to check
+     * @return the number of authors with the nationality
+     */
+    public int countAuthors(String nationality) {
+        LinkedList<Author> countedAuthors = new LinkedList<>();
+
+        for (Book book : books)
+            for (Author author : book.getAuthors())
+                if (!countedAuthors.contains(author)
+                        && author.getName().equalsIgnoreCase(nationality))
+                    countedAuthors.add(author);
+
+        return countedAuthors.size();
+    }
+
+    /**
+     * Counts the number of authors with a certain nationality, an author will
+     * only be counted for maximum 1 time no matter how many books the author
+     * writes, using Set
+     *
+     * @param nationality the nationality you want to check
+     * @return the number of authors with the nationality
+     */
+    public int countAuthors2(String nationality) {
+        // ArrayList belongs to a family "List", List allows to have repeated values
+        // List also has order {1, 2, 3}, add(4)
+
+        // Set, does not have an order, set does not allows repeated values
+        // {"female", "male"} == {"male", "female"},
+        // {0,1,2,3,4,5,6,7,8,9}, {3,1,2,6,4,5,8,9,0,7}
+        HashSet<Author> countedAuthors = new HashSet<>();
+
+        for (Book book : books)
+            for (Author author : book.getAuthors())
+                if (author.getName().equalsIgnoreCase(nationality))
+                    countedAuthors.add(author);
+
+        return countedAuthors.size();
     }
 
 }
