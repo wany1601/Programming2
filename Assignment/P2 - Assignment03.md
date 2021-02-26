@@ -136,7 +136,7 @@ Write a Class `Zoo`, that contains
       Number    : 13
       Female    : 6
       Male      : 7
-      Balanced  : No						
+      Balanced  : Yes						
       Oldest age: 20
   ```
 
