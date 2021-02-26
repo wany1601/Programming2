@@ -24,9 +24,35 @@
 package animal;
 
 /**
+ * A class of Dog
  *
  * @author Yi Wang
  */
 public class Dog extends DomesticatedAnimal {
+
+    private int sportHour;
+
+    public Dog() {
+        super();
+        this.sportHour = 0;
+    }
+
+    public Dog(int sportHour, int closeToHumanLevel, String name, String type, int age, String gender) {
+        super(closeToHumanLevel, name, type, age, gender);
+        this.sportHour = sportHour;
+    }
+
+    public Dog(Dog dog) {
+        super(dog);
+        this.sportHour = dog.sportHour;
+    }
+
+    public int getSportHour() {
+        return sportHour;
+    }
+
+    public void setSportHour(int sportHour) {
+        this.sportHour = sportHour;
+    }
 
 }

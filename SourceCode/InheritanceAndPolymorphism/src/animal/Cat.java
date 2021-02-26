@@ -24,43 +24,35 @@
 package animal;
 
 /**
- * A class of DomesticatedAnimal
+ * A class of Cat
  *
  * @author Yi Wang
  */
-public class DomesticatedAnimal extends Animal {
+public class Cat extends DomesticatedAnimal {
 
-    private int closeToHumanLevel;
+    private int sleepHour;
 
-    public DomesticatedAnimal() {
-        // super means "Animal" here,
-        // you can only call super constructor in the first line
+    public Cat() {
         super();
-        this.closeToHumanLevel = 0;
+        this.sleepHour = sleepHour;
     }
 
-    public DomesticatedAnimal(int closeToHumanLevel, String name,
-            String type, int age, String gender) {
-        super(name, type, age, gender);
-        this.closeToHumanLevel = closeToHumanLevel;
+    public Cat(int sleepHour, int closeToHumanLevel, String name, String type, int age, String gender) {
+        super(closeToHumanLevel, name, type, age, gender);
+        this.sleepHour = sleepHour;
     }
 
-    public DomesticatedAnimal(DomesticatedAnimal domesticatedAnimal) {
-        // polymorphism: DomesticatedAnimal extends Animal
-        // DomesticatedAnimal is a special kind of Animal
-        // if a method requires a parameter of class B, when you call the method
-        // you can give an object of class B, or you can also give an object of
-        // any subclass of class B.
-        super(domesticatedAnimal);
-        this.closeToHumanLevel = domesticatedAnimal.closeToHumanLevel;
+    public Cat(Cat cat) {
+        super(cat);
+        this.sleepHour = cat.sleepHour;
     }
 
-    public int getCloseToHumanLevel() {
-        return closeToHumanLevel;
+    public int getSleepHour() {
+        return sleepHour;
     }
 
-    public void setCloseToHumanLevel(int closeToHumanLevel) {
-        this.closeToHumanLevel = closeToHumanLevel;
+    public void setSleepHour(int sleepHour) {
+        this.sleepHour = sleepHour;
     }
 
 }
