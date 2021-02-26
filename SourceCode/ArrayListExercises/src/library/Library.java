@@ -46,7 +46,7 @@ public class Library {
 
     public Library(Library library) {
 //        this.books = library.books; // shallow copy
-        this.books = new ArrayList<Book>(library.books);        // deep copy
+        this.books = new ArrayList<>(library.books);        // deep copy
     }
 
     /**
