@@ -55,6 +55,21 @@ public class DomesticatedAnimal extends Animal {
         this.closeToHumanLevel = domesticatedAnimal.closeToHumanLevel;
     }
 
+    public boolean equals(DomesticatedAnimal domesticatedAnimal) {
+        return super.equals(domesticatedAnimal)
+                && this.closeToHumanLevel == domesticatedAnimal.closeToHumanLevel;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        str += super.toString();
+        str += String.format("%-10s: %d\n", "CloseLevel", closeToHumanLevel);
+
+        return str;
+    }
+
     public int getCloseToHumanLevel() {
         return closeToHumanLevel;
     }

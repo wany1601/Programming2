@@ -23,6 +23,8 @@
  */
 package animal;
 
+import java.util.Objects;
+
 /**
  * A class of Animal
  *
@@ -54,6 +56,50 @@ public class Animal {
         this.type = animal.type;
         this.age = animal.age;
         this.gender = animal.gender;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // part 1
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+
+        // part 2
+        final Animal other = (Animal) obj;
+
+        // part 3
+        if (this.age != other.age)
+            return false;
+        if (!Objects.equals(this.name, other.name))
+            return false;
+        if (!Objects.equals(this.type, other.type))
+            return false;
+        if (!Objects.equals(this.gender, other.gender))
+            return false;
+        return true;
+    }
+
+    public boolean equals(Animal animal) {
+        return this.name.equals(animal.name)
+                && this.type.equals(animal.type)
+                && this.age == animal.age
+                && this.gender.equals(animal.gender);
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        str += String.format("%-10s: %s\n", "Name", name);
+        str += String.format("%-10s: %s\n", "Type", type);
+        str += String.format("%-10s: %d\n", "Age", age);
+        str += String.format("%-10s: %s\n", "Gender", gender);
+
+        return str;
     }
 
     public String getName() {
