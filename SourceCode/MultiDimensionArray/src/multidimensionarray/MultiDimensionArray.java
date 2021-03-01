@@ -275,6 +275,136 @@ public class MultiDimensionArray {
         return numss;
     }
 
+    /**
+     * Adds two 2-D double arrays together; returns a new array,
+     *
+     *
+     * Example:
+     *
+     * numss1:
+     *
+     * 1 2 3
+     *
+     * 4 5
+     *
+     * 2 2 2
+     *
+     * 3 3 3
+     *
+     * numss2:
+     *
+     * 1 2 3 | 4 5
+     *
+     * 1 1 1
+     *
+     * results:
+     *
+     * 2 3 6 4 5
+     *
+     * 5 6 1
+     *
+     * 2 2 2
+     *
+     * 3 3 3
+     *
+     * @param numss1 a 2d array
+     * @param numss2 another 2d array
+     * @return a new array that contains the sum of the two 2d array
+     */
+    public static double[][] add(double[][] numss1, double[][] numss2) {
+        int maxRow = Math.max(numss1.length, numss2.length);
+        int minRow = Math.min(numss1.length, numss2.length);
+
+        double[][] numss3 = new double[maxRow][];
+
+        // row overlapping
+        for (int i = 0; i < minRow; i++) {
+            int maxCol = Math.max(numss1[i].length, numss2[i].length);
+            int minCol = Math.min(numss1[i].length, numss2[i].length);
+
+            numss3[i] = new double[maxCol];
+
+            // column overlapping
+            for (int j = 0; j < minCol; j++)
+                numss3[i][j] = numss1[i][j] + numss2[i][j];
+
+            // column additional
+            double[] longRow = (numss1[i].length > numss2[i].length) ? numss1[i] : numss2[i];
+            for (int j = minCol; j < maxCol; j++)
+                numss3[i][j] = longRow[j];
+
+        }
+
+        // row additional
+        double[][] largeArray = (numss1.length > numss2.length) ? numss1 : numss2;
+        for (int i = minRow; i < maxRow; i++)
+            numss3[i] = largeArray[i];
+
+        return numss3;
+    }
+
+    /**
+     * append a 2-D double array at the right of another 2-D double array.
+     *
+     * Example:
+     *
+     * numss1:
+     *
+     * 1 2 3
+     *
+     * 4 5
+     *
+     * numss2:
+     *
+     * 1 2 3 4 5
+     *
+     * 1 1 1
+     *
+     * 2 2 2
+     *
+     * 3 3 3
+     *
+     * result:
+     *
+     * 1 2 3 | 1 2 3 4 5
+     *
+     * 4 5 | 1 1 1
+     *
+     * 2 2 2
+     *
+     * 3 3 3
+     *
+     * @param numss1 a 2d array
+     * @param numss2 another 2d array
+     * @return a new 2d array withe numss2 expended after numss1
+     */
+    public static double[][] expendArray(double[][] numss1, double[][] numss2) {
+        int maxRow = Math.max(numss1.length, numss2.length);
+        int minRow = Math.min(numss1.length, numss2.length);
+
+        double[][] numss3 = new double[maxRow][];
+
+        // row overlapping
+        for (int i = 0; i < minRow; i++) {
+            numss3[i] = new double[numss1[i].length + numss2[i].length];
+
+            // copy a row in numss1
+            for (int j = 0; j < numss1[i].length; j++)
+                numss3[i][j] = numss1[i][j];
+
+            // copy a row in numss2 with a shift
+            for (int j = 0; j < numss2[i].length; j++)
+                numss3[i][j + numss1[i].length] = numss2[i][j];
+        }
+
+        // row additional
+        double[][] largeArray = (numss1.length > numss2.length) ? numss1 : numss2;
+        for (int i = minRow; i < maxRow; i++)
+            numss3[i] = largeArray[i];
+
+        return numss3;
+    }
+
     public static void main(String[] args) {
         double[][] numss = {{1, 2, 0, 0, 0}, {3, 4}};
         double[][] numss2 = {{1, 2, 0, 0, 0}, {3, 4}};

@@ -37,6 +37,25 @@ public class ArrayListExercises {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ArrayList<Double> al = new ArrayList<>(Arrays.asList(
+                new Double[]{1.0, 1.0, 2.0, 3.0, 1.0}));
+
+        // to go through an arraylist and remove everything that equals to 1
+        // solution 1: when remove an element, use -- to cancle the ++
+        for (int i = 0; i < al.size(); i++)
+            if (al.get(i) == 1)
+                al.remove(al.get(i--));
+
+        // to go through an arraylist and remove everything that equals to 1
+        // solution 2: only execute ++ when no element is removed
+        for (int i = 0; i < al.size();)
+            if (al.get(i) == 1)
+                al.remove(al.get(i));
+            else
+                i++;
+
+        System.out.println(al);
+
         // not suggested, has no data type restriction
         ArrayList al1 = new ArrayList();            // array list of Objects
         al1.add(1);                                 // elements can be anything
@@ -97,5 +116,4 @@ public class ArrayListExercises {
         al2.remove((Integer) 999);
         System.out.println(al2);
     }
-
 }
