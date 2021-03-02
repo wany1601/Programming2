@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 George Aziz.
+ * Copyright 2021 Yi Wang.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,11 @@ package zoo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
- * A simple class of animal, that contains array of animal
+ * A simple class of Animal
  *
- * @author George Aziz
+ * @author Yi Wang
  */
 public class Animal {
 
@@ -38,12 +37,13 @@ public class Animal {
     private String gender;
     private int age;
     private String type;
-    private static List<String> legalTypes = new ArrayList(Arrays.asList("Cat", "Dog", "Monkey"));
+    private static final ArrayList<String> VALID_TYPES
+            = new ArrayList<>(Arrays.asList(new String[]{"Cat", "Dog", "Monkey"}));
 
     public Animal() {
         this.name = "";
         this.gender = "";
-        this.age = 0;
+        this.age = -1;
         this.type = "";
     }
 
@@ -51,10 +51,7 @@ public class Animal {
         this.name = name;
         this.gender = gender;
         this.age = age;
-        if (isTypeValid(type))
-            this.type = type;
-        else
-            this.type = "";
+        this.type = isTypeValid(type) ? type : "";
     }
 
     public Animal(Animal animal) {
@@ -65,14 +62,16 @@ public class Animal {
     }
 
     /**
-     * Checks if the type of the animal is valid or not
+     * Checks if the type is valid, in the other word, belongs to the
+     * VALID_TYPES
      *
-     * @param type the type of the animal
-     * @return whether the type of the animal is valid or not
+     * @param type the type you want to check
+     * @return if the type is valid, in the other word, belongs to the
+     * VALID_TYPES
      */
     public boolean isTypeValid(String type) {
-        for (String legaltype : legalTypes)
-            if (type.equalsIgnoreCase(legaltype))
+        for (String validType : VALID_TYPES)
+            if (validType.equalsIgnoreCase(type))
                 return true;
 
         return false;
@@ -91,7 +90,7 @@ public class Animal {
 
         str += String.format("%-10s: %s\n", "Name", name);
         str += String.format("%-10s: %s\n", "Gender", gender);
-        str += String.format("%-10s: %s\n", "Age", age);
+        str += String.format("%-10s: %d\n", "Age", age);
         str += String.format("%-10s: %s\n", "Type", type);
 
         return str;
@@ -130,11 +129,8 @@ public class Animal {
             this.type = type;
     }
 
-    public static List<String> getLegalTypes() {
-        return legalTypes;
+    public static ArrayList<String> getVALID_TYPES() {
+        return VALID_TYPES;
     }
 
-    public static void setLegalTypes(List<String> legalTypes) {
-        Animal.legalTypes = legalTypes;
-    }
 }

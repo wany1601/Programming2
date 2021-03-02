@@ -55,6 +55,28 @@ public class DomesticatedAnimal extends Animal {
         this.closeToHumanLevel = domesticatedAnimal.closeToHumanLevel;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        // part 1
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+
+        // part 2
+        final DomesticatedAnimal other = (DomesticatedAnimal) obj;
+
+        // part 3
+        if (!super.equals(other))
+            return false;
+        if (this.closeToHumanLevel != other.closeToHumanLevel)
+            return false;
+        return true;
+    }
+
+    // overload
     public boolean equals(DomesticatedAnimal domesticatedAnimal) {
         return super.equals(domesticatedAnimal)
                 && this.closeToHumanLevel == domesticatedAnimal.closeToHumanLevel;

@@ -61,15 +61,15 @@ public class Animal {
     @Override
     public boolean equals(Object obj) {
         // part 1
-        if (this == obj)
+        if (this == obj)        // comparing address
             return true;
-        if (obj == null)
+        if (obj == null)        // a.equals(xx)
             return false;
         if (getClass() != obj.getClass())
             return false;
 
         // part 2
-        final Animal other = (Animal) obj;
+        final Animal other = (Animal) obj;      // casting the data type
 
         // part 3
         if (this.age != other.age)
@@ -83,6 +83,7 @@ public class Animal {
         return true;
     }
 
+    // overload
     public boolean equals(Animal animal) {
         return this.name.equals(animal.name)
                 && this.type.equals(animal.type)
