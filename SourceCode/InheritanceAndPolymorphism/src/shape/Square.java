@@ -21,26 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package animal;
+package shape;
 
 /**
+ * A class of Square
  *
  * @author Yi Wang
  */
-public class Test {
+public class Square extends Rectangular {
+
+    public Square() {
+        super();
+    }
+
+    public Square(double side) {
+        super(side, side);
+    }
+
+    public Square(Square square) {
+        super(square);
+    }
 
     public static void main(String[] args) {
-        Zoo z = new Zoo();
-        Dog dog = new Dog();
-        Cat cat = new Cat();
-        Animal a1 = new Dog();
-        Animal a2 = new Cat();
-
-        z.addAnimal(dog);
-        z.addAnimal(cat);
-        z.addAnimal(a1);
-        z.addAnimal(a2);
-
-        System.out.println(z);
+        Square s = new Square(1);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s: %.2f\n", "Side", getLength());
+    }
+
 }

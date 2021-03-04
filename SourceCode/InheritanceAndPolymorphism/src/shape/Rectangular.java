@@ -1,5 +1,3 @@
-package animal;
-
 /*
  * The MIT License
  *
@@ -23,43 +21,31 @@ package animal;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import animal.DomesticatedAnimal;
-import java.util.Scanner;
+package shape;
 
 /**
- * A class of Dog
+ * A class of Rectangular
  *
  * @author Yi Wang
  */
-public class Dog extends DomesticatedAnimal {
+public class Rectangular extends Shape {
 
-    private int sportHour;
+    private double length;
+    private double height;
 
-    public Dog() {
-        super();
-        this.sportHour = 0;
+    public Rectangular() {
+        this.length = 1;
+        this.height = 1;
     }
 
-    public Dog(int sportHour, int closeToHumanLevel, String name, String type, int age, String gender) {
-        super(closeToHumanLevel, name, type, age, gender);
-        this.sportHour = sportHour;
+    public Rectangular(double length, double height) {
+        this.length = length;
+        this.height = height;
     }
 
-    public Dog(Dog dog) {
-        super(dog);
-        this.sportHour = dog.sportHour;
-    }
-
-    /**
-     * Prints hello + the name of the dog
-     */
-    public void changeName() {
-        System.out.println("Hello " + name);
-        System.out.println("What name do you want to change to?");
-        Scanner console = new Scanner(System.in);
-        String newName = console.next();
-        name = newName;
-        System.out.println("Alright, you name has been changed to " + name);
+    public Rectangular(Rectangular rectangular) {
+        this.length = rectangular.length;
+        this.height = rectangular.height;
     }
 
     @Override
@@ -70,34 +56,38 @@ public class Dog extends DomesticatedAnimal {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Dog other = (Dog) obj;
-        if (!super.equals(other))
+        final Rectangular other = (Rectangular) obj;
+        if (Double.doubleToLongBits(this.length) != Double.doubleToLongBits(other.length))
             return false;
-        if (this.sportHour != other.sportHour)
+        if (Double.doubleToLongBits(this.height) != Double.doubleToLongBits(other.height))
             return false;
         return true;
-    }
-
-    public boolean equals(Dog dog) {
-        return super.equals(dog) && this.sportHour == dog.sportHour;
     }
 
     @Override
     public String toString() {
         String str = "";
 
-        str += super.toString();
-        str += String.format("%-10s: %d\n", "SportHour", sportHour);
+        str += String.format("%-10s: %.2f\n", "Length", length);
+        str += String.format("%-10s: %.2f\n", "Height", height);
 
         return str;
     }
 
-    public int getSportHour() {
-        return sportHour;
+    public double getLength() {
+        return length;
     }
 
-    public void setSportHour(int sportHour) {
-        this.sportHour = sportHour;
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
 }

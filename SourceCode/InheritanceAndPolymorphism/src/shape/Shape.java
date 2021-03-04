@@ -21,26 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package animal;
+package shape;
 
 /**
+ * A class of Shape
  *
  * @author Yi Wang
  */
-public class Test {
-
-    public static void main(String[] args) {
-        Zoo z = new Zoo();
-        Dog dog = new Dog();
-        Cat cat = new Cat();
-        Animal a1 = new Dog();
-        Animal a2 = new Cat();
-
-        z.addAnimal(dog);
-        z.addAnimal(cat);
-        z.addAnimal(a1);
-        z.addAnimal(a2);
-
-        System.out.println(z);
-    }
+public class Shape {
+    // area and param
 }

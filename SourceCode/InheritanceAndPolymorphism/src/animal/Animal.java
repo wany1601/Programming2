@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 public class Animal {
 
-    private String name;
+    String name;
     private String type;
     private int age;
     private String gender;

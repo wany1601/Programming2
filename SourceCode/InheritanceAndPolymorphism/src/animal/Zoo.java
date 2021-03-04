@@ -23,24 +23,29 @@
  */
 package animal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * A class of Zoo
  *
  * @author Yi Wang
  */
-public class Test {
+public class Zoo {
 
-    public static void main(String[] args) {
-        Zoo z = new Zoo();
-        Dog dog = new Dog();
-        Cat cat = new Cat();
-        Animal a1 = new Dog();
-        Animal a2 = new Cat();
+    private List<Animal> animals;
 
-        z.addAnimal(dog);
-        z.addAnimal(cat);
-        z.addAnimal(a1);
-        z.addAnimal(a2);
-
-        System.out.println(z);
+    public Zoo() {
+        animals = new ArrayList<>();
     }
+
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
+    }
+
+    @Override
+    public String toString() {
+        return "Zoo{" + "animals=" + animals + '}';
+    }
+
 }
