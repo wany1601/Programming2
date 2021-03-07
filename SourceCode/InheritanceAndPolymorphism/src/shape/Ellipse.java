@@ -24,38 +24,38 @@
 package shape;
 
 /**
- * A class of Rectangular
+ * A simple class of Ellipse
  *
  * @author Yi Wang
  */
-public class Rectangular extends Shape {
+public class Ellipse extends Shape {
 
-    private double length;
-    private double height;
+    private double majorAxis;
+    private double minorAxis;
 
-    public Rectangular() {
-        this.length = 1;
-        this.height = 1;
+    public Ellipse() {
+        this.majorAxis = 1;
+        this.minorAxis = 1;
     }
 
-    public Rectangular(double length, double height) {
-        this.length = length;
-        this.height = height;
+    public Ellipse(double majorAxis, double minorAxis) {
+        this.majorAxis = majorAxis;
+        this.minorAxis = minorAxis;
     }
 
-    public Rectangular(Rectangular rectangular) {
-        this.length = rectangular.length;
-        this.height = rectangular.height;
+    public Ellipse(Ellipse ellipse) {
+        this.majorAxis = ellipse.majorAxis;
+        this.minorAxis = ellipse.minorAxis;
     }
 
     @Override
     public double calcArea() {
-        return length * height;
+        return Math.PI * majorAxis * minorAxis;
     }
 
     @Override
-    public double calcPerimeter() {
-        return 2 * (length + height);
+    public double calcArea() {
+        return Math.PI * majorAxis * minorAxis;
     }
 
     @Override
@@ -66,10 +66,10 @@ public class Rectangular extends Shape {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Rectangular other = (Rectangular) obj;
-        if (Double.doubleToLongBits(this.length) != Double.doubleToLongBits(other.length))
+        final Ellipse other = (Ellipse) obj;
+        if (Double.doubleToLongBits(this.majorAxis) != Double.doubleToLongBits(other.majorAxis))
             return false;
-        if (Double.doubleToLongBits(this.height) != Double.doubleToLongBits(other.height))
+        if (Double.doubleToLongBits(this.minorAxis) != Double.doubleToLongBits(other.minorAxis))
             return false;
         return true;
     }
@@ -78,25 +78,26 @@ public class Rectangular extends Shape {
     public String toString() {
         String str = "";
 
-        str += String.format("%-10s: %.2f\n", "Length", length);
-        str += String.format("%-10s: %.2f\n", "Height", height);
+        str += String.format("%-10s: %.2f\n", "Major axis", majorAxis);
+        str += String.format("%-10s: %.2f\n", "Minor axis", minorAxis);
 
         return str;
     }
 
-    public double getLength() {
-        return length;
+    public double getMajorAxis() {
+        return majorAxis;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setMajorAxis(double majorAxis) {
+        this.majorAxis = majorAxis;
     }
 
-    public double getHeight() {
-        return height;
+    public double getMinorAxis() {
+        return minorAxis;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    public void setMinorAxis(double minorAxis) {
+        this.minorAxis = minorAxis;
     }
+
 }

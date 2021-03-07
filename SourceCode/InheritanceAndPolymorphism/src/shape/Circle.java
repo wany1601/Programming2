@@ -24,38 +24,35 @@
 package shape;
 
 /**
- * A class of Shape
+ * A simple class of Circle
  *
  * @author Yi Wang
  */
-public abstract class Shape {
+public class Circle extends Ellipse {
 
-    /**
-     * Calculates the area of a shape
-     *
-     * @return the area of a shape
-     */
-    public abstract double calcArea();      // abstract method, with no body
-
-    /**
-     * Calculates the perimeter of a shape
-     *
-     * @return the perimeter of a shape
-     */
-    public abstract double calcPerimeter();      // abstract method, with no body
-
-    /**
-     * Normal methods are allowed
-     */
-    private void print() {
-        System.out.println("hello");
+    public Circle() {
+        super();
     }
 
-    public static void main(String[] args) {
-        Square s = new Square();
-        Rectangular r = new Square();
-//        Shape sh = new Shape();
-        Shape sh1 = new Square();
+    public Circle(double radius) {
+        super(radius, radius);
+    }
 
+    public Circle(Circle circle) {
+        super(circle);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s: %.2f\n", "Radius", getMajorAxis());
+    }
+
+    public double getRadius() {
+        return getMajorAxis();
+    }
+
+    public void setRadius(double radius) {
+        setMajorAxis(radius);
+        setMinorAxis(radius);
     }
 }

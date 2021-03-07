@@ -42,13 +42,18 @@ public class Square extends Rectangular {
         super(square);
     }
 
-    public static void main(String[] args) {
-        Square s = new Square(1);
-    }
-
     @Override
     public String toString() {
         return String.format("%-10s: %.2f\n", "Side", getLength());
+    }
+
+    public double getSide() {
+        return getLength();
+    }
+
+    public void setSide(double side) {
+        setHeight(side);
+        setLength(side);
     }
 
 }
