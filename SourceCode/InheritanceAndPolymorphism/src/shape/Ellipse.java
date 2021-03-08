@@ -54,8 +54,8 @@ public class Ellipse extends Shape {
     }
 
     @Override
-    public double calcArea() {
-        return Math.PI * majorAxis * minorAxis;
+    public double calcPerimeter() {
+        return 2 * Math.PI * Math.sqrt(((majorAxis * majorAxis) + (minorAxis * minorAxis)) / 2);
     }
 
     @Override

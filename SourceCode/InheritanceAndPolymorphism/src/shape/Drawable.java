@@ -23,44 +23,25 @@
  */
 package shape;
 
-import java.io.Serializable;
-
 /**
- * A class of Square
+ * An interface for drawing the shape
  *
  * @author Yi Wang
  */
-public class Square extends Rectangular implements Drawable {
+public interface Drawable {
+//    private String name;        // data member not allow
 
-    public Square() {
-        super();
-    }
+    static String name = "";      // static is allow, but it will automatically be a final
 
-    public Square(double side) {
-        super(side, side);
-    }
+    // abstract method allow, and no need for keyword "abstract"
+    /**
+     * To draw the shape
+     */
+    void draw();
 
-    public Square(Square square) {
-        super(square);
-    }
-
-    @Override
-    public void draw() {
-        // todo
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%-10s: %.2f\n", "Side", getLength());
-    }
-
-    public double getSide() {
-        return getLength();
-    }
-
-    public void setSide(double side) {
-        setHeight(side);
-        setLength(side);
+    // normal methods allow, with keyword "default"
+    default void print() {
+        System.out.println("hello");
     }
 
 }
