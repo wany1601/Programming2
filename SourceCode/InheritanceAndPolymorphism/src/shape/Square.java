@@ -23,8 +23,6 @@
  */
 package shape;
 
-import java.io.Serializable;
-
 /**
  * A class of Square
  *
@@ -44,9 +42,37 @@ public class Square extends Rectangular implements Drawable {
         super(square);
     }
 
+    /**
+     * Draws a square
+     *
+     * Example: side = 4
+     *
+     * +------+ | | | | +------+
+     */
     @Override
     public void draw() {
-        // todo
+        int rowLength = (int) getSide() * 2;
+        int colLength = (int) getSide();
+
+        // for the first row
+        System.out.print("+");
+        for (int i = 0; i < rowLength - 2; i++)
+            System.out.print("-");
+        System.out.println("+");
+
+        // for the middle part
+        for (int i = 0; i < colLength - 2; i++) {
+            System.out.print("|");
+            for (int j = 0; j < rowLength - 2; j++)
+                System.out.print(" ");
+            System.out.println("|");
+        }
+
+        // for the last row
+        System.out.print("+");
+        for (int i = 0; i < rowLength - 2; i++)
+            System.out.print("-");
+        System.out.println("+");
     }
 
     @Override
@@ -61,6 +87,12 @@ public class Square extends Rectangular implements Drawable {
     public void setSide(double side) {
         setHeight(side);
         setLength(side);
+    }
+
+    public static void main(String[] args) {
+        Square square = new Square(4);
+        square.draw();
+        square.printInfor();
     }
 
 }

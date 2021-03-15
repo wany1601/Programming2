@@ -47,15 +47,37 @@ public abstract class Shape {
     /**
      * Normal methods are allowed
      */
-    private void print() {
-        System.out.println("hello");
+    private static void print(Ellipse e) {
+        e.print();
+    }
+
+    @Override
+    public String toString() {
+        return "I am a boring shape, I don't even know what shape I am.";
     }
 
     public static void main(String[] args) {
-        Square s = new Square();
-        Rectangular r = new Square();
-//        Shape sh = new Shape();
-        Shape sh1 = new Square();
+//        Circle c = new Circle();
+//        Ellipse e = new Ellipse();
+        Ellipse e = new Circle();
+        Shape.print(e);
+
+        // auto-casting
+        int num = 5;
+        double num2 = num;      // put something less accurate to something more accurate
+
+        // manual-casting
+        double num3 = 3.14;
+        int num4 = (int) num3;        // put something more accurate to something less accurate
+
+        // auto-casting
+        Ellipse e1 = new Circle();          // auto casting
+
+        // manual-casting
+        Circle c1 = (Circle) e1; // manual casting
+
+        Ellipse e2 = new Ellipse();
+        System.out.println(e2 instanceof Circle);
 
     }
 }

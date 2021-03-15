@@ -31,17 +31,17 @@ package shape;
 public interface Drawable {
 //    private String name;        // data member not allow
 
-    static String name = "";      // static is allow, but it will automatically be a final
+    public static final String NAME = "";      // static is allow, but it will automatically be a final
 
     // abstract method allow, and no need for keyword "abstract"
     /**
      * To draw the shape
      */
-    void draw();
+    public void draw();
 
     // normal methods allow, with keyword "default"
-    default void print() {
-        System.out.println("hello");
+    public default void printInfor() {
+        System.out.println("You can draw this shape.");
     }
 
 }

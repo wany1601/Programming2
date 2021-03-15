@@ -24,42 +24,44 @@
 package shape;
 
 /**
- * A simple class of Ellipse
+ * A simple class of Triangle
  *
  * @author Yi Wang
  */
-public class Ellipse extends Shape {
+public class Triangle extends Shape {
 
-    private double majorAxis;
-    private double minorAxis;
+    private double sideA;
+    private double sideB;
+    private double angleC;      // degree
 
-    public Ellipse() {
-        this.majorAxis = 1;
-        this.minorAxis = 1;
+    public Triangle() {
+        this.sideA = 1;
+        this.sideB = 1;
+        this.angleC = 90;
     }
 
-    public Ellipse(double majorAxis, double minorAxis) {
-        this.majorAxis = majorAxis;
-        this.minorAxis = minorAxis;
+    public Triangle(double sideA, double sideB, double angleC) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.angleC = angleC;
     }
 
-    public Ellipse(Ellipse ellipse) {
-        this.majorAxis = ellipse.majorAxis;
-        this.minorAxis = ellipse.minorAxis;
+    public Triangle(Triangle triangle) {
+        this.sideA = triangle.sideA;
+        this.sideB = triangle.sideB;
+        this.angleC = triangle.angleC;
     }
 
     @Override
     public double calcArea() {
-        return Math.PI * majorAxis * minorAxis;
+        return sideA * sideB * Math.sin(Math.toRadians(angleC)) / 2;
     }
 
     @Override
     public double calcPerimeter() {
-        return 2 * Math.PI * Math.sqrt(((majorAxis * majorAxis) + (minorAxis * minorAxis)) / 2);
-    }
-
-    public void print() {
-        System.out.println("I am blue");
+        double sideC = Math.sqrt(sideA * sideA + sideB * sideB
+                - 2 * sideA * sideB * Math.cos(Math.toRadians(angleC)));
+        return sideA + sideB + sideC;
     }
 
     @Override
@@ -70,10 +72,12 @@ public class Ellipse extends Shape {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Ellipse other = (Ellipse) obj;
-        if (Double.doubleToLongBits(this.majorAxis) != Double.doubleToLongBits(other.majorAxis))
+        final Triangle other = (Triangle) obj;
+        if (Double.doubleToLongBits(this.sideA) != Double.doubleToLongBits(other.sideA))
             return false;
-        if (Double.doubleToLongBits(this.minorAxis) != Double.doubleToLongBits(other.minorAxis))
+        if (Double.doubleToLongBits(this.sideB) != Double.doubleToLongBits(other.sideB))
+            return false;
+        if (Double.doubleToLongBits(this.angleC) != Double.doubleToLongBits(other.angleC))
             return false;
         return true;
     }
@@ -82,26 +86,35 @@ public class Ellipse extends Shape {
     public String toString() {
         String str = "";
 
-        str += String.format("%-10s: %.2f\n", "Major axis", majorAxis);
-        str += String.format("%-10s: %.2f\n", "Minor axis", minorAxis);
+        str += String.format("%-10s: %.2f\n", "Side A", sideA);
+        str += String.format("%-10s: %.2f\n", "Side B", sideB);
+        str += String.format("%-10s: %.2f\n", "Angle C", angleC);
 
         return str;
     }
 
-    public double getMajorAxis() {
-        return majorAxis;
+    public double getSideA() {
+        return sideA;
     }
 
-    public void setMajorAxis(double majorAxis) {
-        this.majorAxis = majorAxis;
+    public void setSideA(double sideA) {
+        this.sideA = sideA;
     }
 
-    public double getMinorAxis() {
-        return minorAxis;
+    public double getSideB() {
+        return sideB;
     }
 
-    public void setMinorAxis(double minorAxis) {
-        this.minorAxis = minorAxis;
+    public void setSideB(double sideB) {
+        this.sideB = sideB;
+    }
+
+    public double getAngleC() {
+        return angleC;
+    }
+
+    public void setAngleC(double angleC) {
+        this.angleC = angleC;
     }
 
 }

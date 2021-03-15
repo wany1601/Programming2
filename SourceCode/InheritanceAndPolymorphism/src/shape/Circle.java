@@ -43,6 +43,11 @@ public class Circle extends Ellipse {
     }
 
     @Override
+    public void print() {
+        System.out.println("I am red");
+    }
+
+    @Override
     public String toString() {
         return String.format("%-10s: %.2f\n", "Radius", getMajorAxis());
     }
