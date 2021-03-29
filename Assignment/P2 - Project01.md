@@ -66,7 +66,6 @@ The bookstore requires a system with two hierarchies. (1) for the item, and (2) 
     * the `itemNo` should increase by one every time a book is created. 
 2. Constructor with `title`, `authors` and the inherited data members
     * set the `itemNo` as this pattern `B0001` (uppercase letter 'B' followed by a 4 digits number)
-    * the category can only be `{"history", "science", "cook", "art", "sports", "others"}`
 3. Copy constructor
 4. `equals()` and `hashCode()`
     * consider all data members defined in the `Book` class, and `category` and `price` from the `Item` class
@@ -89,7 +88,6 @@ The bookstore requires a system with two hierarchies. (1) for the item, and (2) 
     * set the `itemNo` as this pattern `C0001` (uppercase letter 'C' followed by a 4 digits number)
 2. Constructor with `name`, `artist`, and the inherited data members
     * set the `itemNo` as this pattern `C0001` (uppercase letter 'C' followed by a 4 digits number)
-    * the category can only be `{"pop", "classic", "jazz", "new age", "sound track", "others"}`
 3. Copy constructor
 4. `equals()` and `hashCode()`
     * consider all data members defined in the `Book` class and `category` and `price` from the `Item` class
