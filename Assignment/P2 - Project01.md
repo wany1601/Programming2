@@ -45,7 +45,7 @@ The bookstore requires a system with two hierarchies. (1) for the item, and (2) 
 2. Constructor with `itemNo`, `price`, `amount`, `category`, `isGift`
 3. Copy constructor
 4. `equals()` and `hashCode()`
-    * only consider `category` and `price`
+    * only consider `itemNo`, `category` and `price`
 5. `toString()`: **All** `toString()` methods should have the format like a table (like what we have in the class).
 6. Getters and setters
 
@@ -244,9 +244,9 @@ A customer or an employee can exchange points for a gift, but that gift can only
      1. decrease the `point` of the user by `70`
      2. decrease the amount of that item by one
      3. return `true`
-3.	`boolean pointToGift` method with `itemNo`: to find a specific gift 
+3.	`boolean pointToGift` method with `item`: to find a specific gift 
    * if the user does not have enough point, directly return `false`
-   * if the item with that specific `itemNo` cannot be used as a gift (`isGift` is `false`), return `false`
+   * if the item cannot be used as a gift (`isGift` is `false`), return `false`
    * else
      1. decrease the `point` of the user by `100`
      2. decrease the amount of that item by one
@@ -257,19 +257,12 @@ A customer or an employee can exchange points for a gift, but that gift can only
 ## 4 **BookStore class**
 The `BookStore` class is the System class, the previous two hierarchies will be used in this class.
 
-### 4.1 **Data members**
+### 4.1 **Static variables**
 1.	`ArrayList<Item> items`: the list of items in the store
 2.	`ArrayList<Employee> employees`: the list of employees in the store
 3.	`ArrayList<Customer> customers`: the list of customers in the store
 
-### 4.2 **Methods**
-1.	Default constructor
-    * initialize everything to be empty ArrayLists
-2.	Constructor with `items`, `employees` and `customers`
-    * initialize everything as the parameters
-3.	Copy constructor
-    * **deep copy** of all data members of another bookstore.
-
+### 4.2 **Static methods**
 4.	`addItem` method: to add an item into the `items` list. 
     * If the item already exists (using `equals()` in the `Item` class to compare), then update the `amount`
         * For example: there is an item `X` with amount 5, and you want to add an item `Y` with amount 3. By comparing `X` and `Y`, you found that they are the same. In this case, directly modify the `amount` of item `X` to 8 (5 + 3).
