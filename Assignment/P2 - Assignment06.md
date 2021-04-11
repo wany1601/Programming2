@@ -2,11 +2,11 @@
 
 ## **Due Date:** 
 
-MMM-DD HR:MI:SE. **Late submission will directly be marked as 0**.
+Apr-17 23:57:00. **Late submission will directly be marked as 0**.
 
 ## **Submission:**
 
-**Please submit one .java file for this assignment**.
+**Please submit two .java file for this assignment**.
 
 **Full Score**: 100
 

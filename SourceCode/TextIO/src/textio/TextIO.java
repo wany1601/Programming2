@@ -134,7 +134,7 @@ public class TextIO {
                     nums.add(-1);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
         }
 
         return nums;
