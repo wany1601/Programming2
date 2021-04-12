@@ -1,0 +1,5 @@
+id fname lname regiStatus score1 score2
+0001 yi wang registered 98 A
+0002 mike SNOW unregistered 94 92
+0003 Lucy Kite registered 100 98
+0004 Tony Yong registered 48 62

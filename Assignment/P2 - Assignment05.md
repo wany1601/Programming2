@@ -79,7 +79,7 @@ Apr-09 23:57:59. **Late submission will directly be marked as 0**.
 // There is a space between each !
 ```
 
-5. Create a method `int[][] generateMatrix(int row, int col, int boundary1, int boundary2, int iteration)` that generates a random matrix with random numbers between `[min(boundary1, boundary2), max(boundary1, boundary2))`.
+5. Create a method `int[][] generateMatrix(int row, int boundary1, int boundary2, int iteration)` that generates a random square matrix  (`row` equals `col`) with random numbers between `[min(boundary1, boundary2), max(boundary1, boundary2))`.
     * The sum of the diagonal and the sub-diagonal should be the same. If not, regenerate it again, until a matrix that satisfies the condition is generated (return that matrix).
     
     * If you try `iteration` times and none of the matrixes satisfy the condition, return `null`.

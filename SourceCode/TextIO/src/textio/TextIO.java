@@ -45,8 +45,8 @@ public class TextIO {
         Input
          */
 //        String path = "C:\\Users\\andre\\Desktop\\TextIO\\hello.txt";       // absolute path
-        String path = "hello.txt";       // relative path
-        System.out.println(readFile4(path));
+        String path = "txt\\studentData.txt";       // relative path
+        System.out.println(readStudentData(path));
     }
 
     public static String readFile(String path) {
@@ -70,8 +70,8 @@ public class TextIO {
         return str;
     }
 
-    public static int readFile2(String str) {
-        File file = new File(str);
+    public static int readFile2(String path) {
+        File file = new File(path);
 
         int num = 0;
 
@@ -80,14 +80,14 @@ public class TextIO {
         } catch (IOException e) {
             System.out.println(String.format("%s: %s", e.getClass(), e.getMessage()));
         } catch (InputMismatchException e) {
-            // ????
+            System.out.println(String.format("File %s does not exist", path));
         }
 
         return num;
     }
 
     /**
-     * Read only one row
+     * Read only one row a b c d e f g
      *
      * @param path
      * @return
@@ -111,13 +111,21 @@ public class TextIO {
             }
 
         } catch (IOException e) {
-
+            System.out.println(String.format("File %s does not exist", path));
         }
         return nums;
     }
 
     /**
      * Read many rows but one column
+     *
+     * a
+     *
+     * b
+     *
+     * c
+     *
+     * d
      *
      * @param path the path of the file
      * @return
@@ -135,8 +143,80 @@ public class TextIO {
                 }
             }
         } catch (IOException e) {
+            System.out.println(String.format("File %s does not exist", path));
         }
 
         return nums;
     }
+
+    /**
+     * Read data from StudentData.txt and store all information of students in
+     * an ArrayList.
+     *
+     * @param path the path of the file
+     * @return the arraylist of student that contains information of all
+     * students
+     */
+    public static ArrayList<Student> readStudentData(String path) {
+        File file = new File(path);
+
+        ArrayList<Student> students = new ArrayList<>();
+
+        try (Scanner input = new Scanner(file)) {
+            input.nextLine();           // read the header, but not touch it
+
+            while (input.hasNext()) {           // read multi-row
+                String row = input.nextLine();
+                String[] data = row.split(" ");     // {"0001", "yi", "wang", "registered", "98", "78"}
+
+                String id = data[0];
+                String fname = toTitleCase(data[1]);
+                String lname = toTitleCase(data[2]);
+                double score1;
+                double score2;
+                boolean registered = !data[3].toLowerCase().contains("un");
+                try {
+                    score1 = Double.parseDouble(data[4]);
+                } catch (java.lang.NumberFormatException e) {
+                    score1 = -1;
+                }
+                try {
+                    score2 = Double.parseDouble(data[5]);
+                } catch (java.lang.NumberFormatException e) {
+                    score2 = -1;
+                }
+                double[] scores = {score1, score2};
+
+                Student student = new Student(id, fname, lname, registered, scores);
+                students.add(student);
+            }
+
+            // read the data
+        } catch (IOException e) {
+            System.out.println(String.format("File %s does not exist", path));
+        }
+
+        return students;
+    }
+
+    public static boolean isNumValid(String str) {
+        char[] chas = str.toCharArray();
+
+        for (char c : chas)
+            if (!Character.isDigit(c))
+                return false;
+
+        return true;
+    }
+
+    /**
+     * Converts a string to title case
+     *
+     * @param str the original string
+     * @return the string in title case, like "Xxxxx"
+     */
+    public static String toTitleCase(String str) {
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1).toLowerCase();
+    }
+
 }
