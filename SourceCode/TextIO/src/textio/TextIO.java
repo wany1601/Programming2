@@ -24,11 +24,15 @@
 package textio;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,18 +43,28 @@ public class TextIO {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         /*
         Input
          */
 //        String path = "C:\\Users\\andre\\Desktop\\TextIO\\hello.txt";       // absolute path
-        String path = "txt\\studentData.txt";       // relative path
-        System.out.println(readStudentData(path));
+//        String path = "txt\\student.csv";       // relative path
+//        System.out.println(readStudentData(path));
+
+        /*
+        Output
+         */
+        String path = "numMatrix.csv";
+        int num = 999;
+        int[] nums = {1, 2, 3, 4, 5};
+        int[][] numss = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {0, 0, 0}};
+        writeFileTable(path, numss);
+
     }
 
     public static String readFile(String path) {
-        // Step 1: create a file object
+        // Step 1: create a File object
         File file = new File(path);     // java does not care if the path is correct
 //        Scanner input = null;
         String str = "";
@@ -167,7 +181,7 @@ public class TextIO {
 
             while (input.hasNext()) {           // read multi-row
                 String row = input.nextLine();
-                String[] data = row.split(" ");     // {"0001", "yi", "wang", "registered", "98", "78"}
+                String[] data = row.split(",");     // {"0001", "yi", "wang", "registered", "98", "78"}
 
                 String id = data[0];
                 String fname = toTitleCase(data[1]);
@@ -217,6 +231,83 @@ public class TextIO {
      */
     public static String toTitleCase(String str) {
         return Character.toUpperCase(str.charAt(0)) + str.substring(1).toLowerCase();
+    }
+
+    /**
+     * Writes data to a file
+     *
+     * @param path the path of the output file
+     * @param num the data to write
+     */
+    public static void writeFile(String path, int num) {
+        // Step 1: create File object
+        File file = new File(path);
+
+        // Step 2: create FileWriter object
+        try (FileWriter fw = new FileWriter(file, true)) {
+            fw.write(num + "\n");
+//            PrintWriter pw = new PrintWriter(fw);
+//            pw.println(pw);
+        } catch (IOException e) {
+            System.out.println("Writing file failed");
+        }
+    }
+
+    /**
+     * Writes a row of data into a file
+     *
+     * @param path the path of the file
+     * @param nums the data to write: 1 2 3 4 5
+     */
+    public static void writeFileRow(String path, int[] nums) {
+        File file = new File(path);
+
+        try (FileWriter fw = new FileWriter(file, true)) {
+            for (int num : nums)
+                fw.write(num + ",");
+        } catch (IOException e) {
+            System.out.println(String.format("%s: %s", e.getClass(), e.getMessage()));
+        }
+    }
+
+    /**
+     * Writes a column of data into a file
+     *
+     * @param path the path of the file
+     * @param nums the data to write
+     */
+    public static void writeFileCol(String path, int[] nums) {
+        File file = new File(path);
+
+        try (FileWriter fw = new FileWriter(file, true)) {
+            for (int num : nums)
+                fw.write(num + "\n");
+
+        } catch (IOException e) {
+            System.out.println(String.format("%s: %s", e.getClass(), e.getMessage()));
+        }
+
+    }
+
+    /**
+     * Writes a matrix of data into a file
+     *
+     * @param path the path of the file
+     * @param numss the data to write
+     */
+    public static void writeFileTable(String path, int[][] numss) {
+        File file = new File(path);
+
+        try (FileWriter fw = new FileWriter(file, true)) {
+            for (int[] nums : numss) {
+                for (int num : nums)
+                    fw.write(num + ",");
+                fw.write("\n");
+            }
+
+        } catch (IOException e) {
+            System.out.println(String.format("%s: %s", e.getClass(), e.getMessage()));
+        }
     }
 
 }
