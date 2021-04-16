@@ -26,13 +26,9 @@ package textio;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -73,7 +69,7 @@ public class TextIO {
         // why should we always have to cut it by ourselves?
         // so you just need to create the link (create the scanner object between the ()),
         // and Java will automatically cut the link after we finish the try-catch
-        try (Scanner input = new Scanner(file)) {
+        try ( Scanner input = new Scanner(file)) {
             str = input.nextLine();
         } catch (IOException e) {
             System.out.println(String.format("File %s does not exist", path));
@@ -89,7 +85,7 @@ public class TextIO {
 
         int num = 0;
 
-        try (Scanner input = new Scanner(file)) {
+        try ( Scanner input = new Scanner(file)) {
             num = input.nextInt();
         } catch (IOException e) {
             System.out.println(String.format("%s: %s", e.getClass(), e.getMessage()));
@@ -112,7 +108,7 @@ public class TextIO {
         int len = 5;
         int[] nums = new int[len];
 
-        try (Scanner input = new Scanner(file)) {
+        try ( Scanner input = new Scanner(file)) {
             row = input.nextLine();             // extract everything
 
             String[] strs = row.split(" ");
@@ -148,7 +144,7 @@ public class TextIO {
         File file = new File(path);
         ArrayList<Integer> nums = new ArrayList<>();
 
-        try (Scanner input = new Scanner(file)) {
+        try ( Scanner input = new Scanner(file)) {
             while (input.hasNext()) {        // boolean method to check if the scanner reach the end of the file or not
                 try {
                     nums.add(Integer.parseInt(input.next()));
@@ -176,7 +172,7 @@ public class TextIO {
 
         ArrayList<Student> students = new ArrayList<>();
 
-        try (Scanner input = new Scanner(file)) {
+        try ( Scanner input = new Scanner(file)) {
             input.nextLine();           // read the header, but not touch it
 
             while (input.hasNext()) {           // read multi-row
@@ -244,7 +240,7 @@ public class TextIO {
         File file = new File(path);
 
         // Step 2: create FileWriter object
-        try (FileWriter fw = new FileWriter(file, true)) {
+        try ( FileWriter fw = new FileWriter(file, true)) {
             fw.write(num + "\n");
 //            PrintWriter pw = new PrintWriter(fw);
 //            pw.println(pw);
@@ -262,7 +258,7 @@ public class TextIO {
     public static void writeFileRow(String path, int[] nums) {
         File file = new File(path);
 
-        try (FileWriter fw = new FileWriter(file, true)) {
+        try ( FileWriter fw = new FileWriter(file, true)) {
             for (int num : nums)
                 fw.write(num + ",");
         } catch (IOException e) {
@@ -279,7 +275,7 @@ public class TextIO {
     public static void writeFileCol(String path, int[] nums) {
         File file = new File(path);
 
-        try (FileWriter fw = new FileWriter(file, true)) {
+        try ( FileWriter fw = new FileWriter(file, true)) {
             for (int num : nums)
                 fw.write(num + "\n");
 
@@ -298,7 +294,7 @@ public class TextIO {
     public static void writeFileTable(String path, int[][] numss) {
         File file = new File(path);
 
-        try (FileWriter fw = new FileWriter(file, true)) {
+        try ( FileWriter fw = new FileWriter(file, true)) {
             for (int[] nums : numss) {
                 for (int num : nums)
                     fw.write(num + ",");

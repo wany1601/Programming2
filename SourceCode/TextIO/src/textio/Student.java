@@ -23,6 +23,7 @@
  */
 package textio;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -30,7 +31,9 @@ import java.util.Arrays;
  *
  * @author Yi Wang
  */
-public class Student {
+// by default, a user-defined class is not serializable
+// you can turn it to serializable by adding "implements Serializable"
+public class Student implements Serializable {
 
     private String id;
     private String fname;
