@@ -21,65 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package simpleschoolsystem;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+package bookstore;
 
 /**
- * A simple class of Assignment
  *
  * @author Yi Wang
  */
-public class Assignment implements Serializable {
+public class Cd extends Item {
 
-    private String id;
-    private String title;
-    private double weight;          // 0.05 means 5%
-    private ArrayList<Double> grades;
+    protected String name;
+    protected Person artist;
+    private static int nextCdNo = 1;
 
-    public Assignment(String id, String title, double weight, ArrayList<Double> grades) {
-        this.id = id;
-        this.title = title;
-        this.weight = weight;
-        this.grades = grades;
+    public Cd() {
+        super();
+        this.name = name;
+        this.artist = artist;
+        setItemNo(String.format("C%04d", nextCdNo++));
     }
 
-    @Override
-    public String toString() {
-        return "Assignment{" + "id=" + id + ", title=" + title + ", weight=" + weight + ", grades=" + grades + '}';
+    public Cd(String name, Person artist, String itemNo, double price, int amount, String category, boolean isGift) {
+        super(itemNo, price, amount, category, isGift);
+        this.name = name;
+        this.artist = artist;
+        setItemNo(String.format("C%04d", nextCdNo++));
     }
 
-    public String getId() {
-        return id;
+    public Cd(Cd cd) {
+        super(cd);
+        this.name = cd.name;
+        this.artist = new Person(cd.artist);
+        setItemNo(String.format("C%04d", nextCdNo++));
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-        return title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Person getArtist() {
+        return artist;
     }
 
-    public double getWeight() {
-        return weight;
+    public void setArtist(Person artist) {
+        this.artist = artist;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public static int getNextCdNo() {
+        return nextCdNo;
     }
 
-    public ArrayList<Double> getGrades() {
-        return grades;
+    public static void setNextCdNo(int nextCdNo) {
+        Cd.nextCdNo = nextCdNo;
     }
-
-    public void setGrades(ArrayList<Double> grades) {
-        this.grades = grades;
-    }
-
 }

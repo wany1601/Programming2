@@ -21,65 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package simpleschoolsystem;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+package bookstore;
 
 /**
- * A simple class of Assignment
  *
  * @author Yi Wang
  */
-public class Assignment implements Serializable {
+public class Employee extends User {
 
-    private String id;
-    private String title;
-    private double weight;          // 0.05 means 5%
-    private ArrayList<Double> grades;
+    private double salary;
+    private static int nextEmployeeId = 1;
 
-    public Assignment(String id, String title, double weight, ArrayList<Double> grades) {
-        this.id = id;
-        this.title = title;
-        this.weight = weight;
-        this.grades = grades;
+    public Employee() {
+        super();
+        this.salary = salary;
+        setId(String.format("E%04d", nextEmployeeId++));
+    }
+
+    public Employee(double salary, String id, int point, String name, String gender, String phoneNo, String email) {
+        super(id, point, name, gender, phoneNo, email);
+        this.salary = salary;
+        setId(String.format("E%04d", nextEmployeeId++));
+    }
+
+    public Employee(Employee employee) {
+        super(employee);
+        this.salary = employee.salary;
+        setId(String.format("E%04d", nextEmployeeId++));
     }
 
     @Override
-    public String toString() {
-        return "Assignment{" + "id=" + id + ", title=" + title + ", weight=" + weight + ", grades=" + grades + '}';
+    public int calcPoint() {
+        double ratio = 0.01;
+        return (int) (salary * ratio);
     }
 
-    public String getId() {
-        return id;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
-    public String getTitle() {
-        return title;
+    public static int getNextEmployeeId() {
+        return nextEmployeeId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public ArrayList<Double> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(ArrayList<Double> grades) {
-        this.grades = grades;
+    public static void setNextEmployeeId(int nextEmployeeId) {
+        Employee.nextEmployeeId = nextEmployeeId;
     }
 
 }

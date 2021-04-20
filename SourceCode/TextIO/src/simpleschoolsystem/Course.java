@@ -23,14 +23,16 @@
  */
 package simpleschoolsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple class of Course
  *
  * @author Yi Wang
  */
-public class Course {
+public class Course implements Serializable {
 
     private String id;
     private String name;
@@ -46,13 +48,52 @@ public class Course {
         this.assignments = new ArrayList<>();
     }
 
+    // TODO
+    public void addAssignment(Teacher teacher, Assignment assignment) {
+//        if (!this.teacher.equals(teacher))
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Objects.hashCode(this.teacher);
+        hash = 67 * hash + Objects.hashCode(this.students);
+        hash = 67 * hash + Objects.hashCode(this.assignments);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Course other = (Course) obj;
+        if (!Objects.equals(this.id, other.id))
+            return false;
+        if (!Objects.equals(this.name, other.name))
+            return false;
+        if (!Objects.equals(this.teacher, other.teacher))
+            return false;
+        if (!Objects.equals(this.students, other.students))
+            return false;
+        if (!Objects.equals(this.assignments, other.assignments))
+            return false;
+        return true;
+    }
+
     @Override
     public String toString() {
         String str = "";
 
         str += String.format("%-10s: %s\n", "ID", id);
         str += String.format("%-10s: %s\n", "Name", name);
-        str += String.format("%-10s: %s\n", "Teacher", (teacher == null) ? null : teacher.getName());
+        str += String.format("%-10s: %s\n", "Teacher",
+                (teacher == null) ? null : teacher.getName());
 
         str += "Reg Students:\n";
         for (Student student : students)

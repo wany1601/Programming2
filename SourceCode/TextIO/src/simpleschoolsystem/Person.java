@@ -23,12 +23,14 @@
  */
 package simpleschoolsystem;
 
+import java.io.Serializable;
+
 /**
  * A simple class of Person
  *
  * @author Yi Wang
  */
-public class Person {
+public class Person implements Serializable {
 
     private String id;
     private String fname;

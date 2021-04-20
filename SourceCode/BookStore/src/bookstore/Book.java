@@ -21,41 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package simpleschoolsystem;
+package bookstore;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A simple class of Assignment
  *
  * @author Yi Wang
  */
-public class Assignment implements Serializable {
+public class Book extends Item {
 
-    private String id;
-    private String title;
-    private double weight;          // 0.05 means 5%
-    private ArrayList<Double> grades;
+    protected String title;
+    protected ArrayList<Person> authors;
+    private static int nextBookNo = 1;
 
-    public Assignment(String id, String title, double weight, ArrayList<Double> grades) {
-        this.id = id;
+    public Book() {
+        super();
+        setItemNo(String.format("B%04d", nextBookNo++));
+        this.title = "";
+        this.authors = new ArrayList<>();
+    }
+
+    public Book(String title, ArrayList<Person> authors, String itemNo, double price, int amount, String category, boolean isGift) {
+        super(itemNo, price, amount, category, isGift);
         this.title = title;
-        this.weight = weight;
-        this.grades = grades;
+        this.authors = authors;
+        setItemNo(String.format("B%04d", nextBookNo++));
     }
 
-    @Override
-    public String toString() {
-        return "Assignment{" + "id=" + id + ", title=" + title + ", weight=" + weight + ", grades=" + grades + '}';
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public Book(Book book) {
+        super(book);
+        this.title = book.title;
+        this.authors = new ArrayList<>(book.authors);
+        setItemNo(String.format("B%04d", nextBookNo++));
     }
 
     public String getTitle() {
@@ -66,20 +64,20 @@ public class Assignment implements Serializable {
         this.title = title;
     }
 
-    public double getWeight() {
-        return weight;
+    public ArrayList<Person> getAuthors() {
+        return authors;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setAuthors(ArrayList<Person> authors) {
+        this.authors = authors;
     }
 
-    public ArrayList<Double> getGrades() {
-        return grades;
+    public static int getNextBookNo() {
+        return nextBookNo;
     }
 
-    public void setGrades(ArrayList<Double> grades) {
-        this.grades = grades;
+    public static void setNextBookNo(int nextBookNo) {
+        Book.nextBookNo = nextBookNo;
     }
 
 }

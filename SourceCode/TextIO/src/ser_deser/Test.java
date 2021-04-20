@@ -37,9 +37,12 @@ import textio.Student;
 public class Test {
 
     public static void main(String[] args) {
+        Integer num1 = -8;
+        Integer num2 = 0;
+        System.out.println(num1 / num2);
 //        String str = "hello";         // pre-defined class
 //        String[] strs = {"hello", "world", "yi", "wang"};       // array object
-        String path = "stu.ser"; // serialized file
+//        String path = "stu.ser"; // serialized file
 //        Student stu = new Student("0001", "yi", "wang", true, new double[]{98, 92});
         // serialization
 //        serializeData(path, stu);
@@ -49,7 +52,7 @@ public class Test {
         // not the data type we are looking for. We usually have to cast the result
         // of deserialization into the proper data type manually.
 //        System.out.println(Arrays.toString((String[]) deserializeData(path)));
-        System.out.println((Student) deserializeData(path));
+//        System.out.println((Student) deserializeData(path));
     }
 
     /**

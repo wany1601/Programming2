@@ -23,6 +23,7 @@
  */
 package simpleschoolsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -30,13 +31,30 @@ import java.util.ArrayList;
  *
  * @author Yi Wang
  */
-public class Student extends Person {
+public class Student extends Person implements Serializable {
 
     private ArrayList<Course> courses;
 
     public Student(String id, String fname, String lname, String gender) {
         super(id, fname, lname, gender);
         this.courses = new ArrayList<>();
+    }
+
+    /**
+     * Register a course for the student
+     *
+     * @param course the course to be registered
+     * @return if the course is registered successfully: 0: success, 1:
+     * registered already, 2: course is full, 3: not satisfy the pre-requirement
+     */
+    public int registerCourse(Course course) {
+        if (courses.contains(course))           // calling equals() in Course
+            return 1;           // registered the course already
+
+        courses.add(course);                // add the course on the student side
+        course.getStudents().add(this);     // add the student on the course side
+        SimpleSchoolSystem.serializeALlData();      // serialize all data
+        return 0;               // register successfully
     }
 
     @Override

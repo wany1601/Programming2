@@ -23,6 +23,11 @@
  */
 package simpleschoolsystem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -32,16 +37,121 @@ import java.util.ArrayList;
  */
 public class SimpleSchoolSystem {
 
-    private static ArrayList<Student> students = new ArrayList<>();
-    private static ArrayList<Teacher> teachers = new ArrayList<>();
-    private static ArrayList<Course> courses = new ArrayList<>();
+    private static ArrayList<Student> students;
+    private static ArrayList<Teacher> teachers;
+    private static ArrayList<Course> courses;
 
-    public static void main(String[] args) {
-        Student s1 = new Student("S0001", "Yi", "Wang", "male");
-        System.out.println(s1);
-        Teacher t1 = new Teacher("T0001", "Jon", "Snow", "male");
-        System.out.println(t1);
-        Course c1 = new Course("C0001", "Programing 1");
-        System.out.println(c1);
+    /**
+     * initializes students, teachers and courses
+     */
+    public static void initData() {
+        File studentFile = new File("students.ser");
+        File teacherFile = new File("teachers.ser");
+        File courseFile = new File("courses.ser");
+
+        if (studentFile.isFile())
+            students = (ArrayList<Student>) deserializeData("students.ser");
+        else
+            students = new ArrayList<>();
+
+        if (teacherFile.isFile())
+            teachers = (ArrayList<Teacher>) deserializeData("teachers.ser");
+        else
+            teachers = new ArrayList<>();
+
+        if (courseFile.isFile())
+            courses = (ArrayList<Course>) deserializeData("courses.ser");
+        else
+            courses = new ArrayList<>();
     }
+
+    /**
+     * Generates an ID for the new element
+     *
+     * @param type if the new element is a Student, or a Teacher or a Course
+     * @return the ID for the new element
+     */
+    public static String generateID(char type) {
+        type = Character.toLowerCase(type);
+        switch (type) {
+            case 's':
+                return String.format("S%04d", students.size() + 1);
+            case 't':
+                return String.format("T%04d", teachers.size() + 1);
+            default:
+                return String.format("C%04d", courses.size() + 1);
+        }
+    }
+
+    /**
+     * Serialize data into a file
+     *
+     * @param path the path of the file
+     * @param object the object to be serialized
+     */
+    public static void serializeData(String path, Object object) {
+        try ( FileOutputStream fos = new FileOutputStream(path)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(object);
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * Deserialize data from a file
+     *
+     * @param path the path of the file
+     * @return the data deserialized from the file
+     */
+    public static Object deserializeData(String path) {
+        Object object = null;
+        try ( FileInputStream fis = new FileInputStream(path)) {
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            object = ois.readObject();
+        } catch (Exception e) {
+            System.out.println("!!!!!");
+        }
+
+        return object;
+    }
+
+    /**
+     * Serialize students, teachers, and courses
+     */
+    public static void serializeALlData() {
+        serializeData("students.ser", students);
+        serializeData("teachers.ser", teachers);
+        serializeData("courses.ser", courses);
+    }
+
+    /**
+     * adds a new student to students
+     *
+     * @param student a new student
+     */
+    public static void addStudent(Student student) {
+        students.add(student);
+        serializeALlData();
+    }
+
+    /**
+     * adds a new teacher to teachers
+     *
+     * @param teacher a new teacher
+     */
+    public static void addTeacher(Teacher teacher) {
+        teachers.add(teacher);
+        serializeALlData();
+    }
+
+    /**
+     * adds a new course to courses
+     *
+     * @param course a new course
+     */
+    public static void addCourse(Course course) {
+        courses.add(course);
+        serializeALlData();
+    }
+
 }
