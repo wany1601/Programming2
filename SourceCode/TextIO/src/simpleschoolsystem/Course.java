@@ -23,6 +23,9 @@
  */
 package simpleschoolsystem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,17 +43,138 @@ public class Course implements Serializable {
     private ArrayList<Student> students;
     private ArrayList<Assignment> assignments;
 
-    public Course(String id, String name) {
-        this.id = id;
+    public Course(String name) {
+        this.id = SimpleSchoolSystem.generateID('c');
         this.name = name;
         this.teacher = null;
         this.students = new ArrayList<>();
         this.assignments = new ArrayList<>();
     }
 
-    // TODO
-    public void addAssignment(Teacher teacher, Assignment assignment) {
-//        if (!this.teacher.equals(teacher))
+    /**
+     * Generates the ID for the new assignment
+     *
+     * @return the ID for the new assignment
+     */
+    public String generateAssignmentId() {
+        return String.format("A%d", assignments.size() + 1);
+    }
+
+    /**
+     * adds assignment to the course
+     *
+     * @param teacher the teacher who does the operation
+     * @param assignment the new assignment
+     * @return if the assignment is successfully added
+     */
+    public boolean addAssignment(Teacher teacher, Assignment assignment) {
+        if (!this.teacher.equals(teacher))
+            return false;
+
+        assignments.add(assignment);
+        SimpleSchoolSystem.serializeALlData();
+        return true;
+    }
+
+    /**
+     * Calculates the mean grade of an assignment
+     *
+     * @param assignment the assignment
+     * @return the mean grade of an assignment
+     */
+    public Double calcAssignmentMean(Assignment assignment) {
+        double mean = 0;
+        double count = 0;       // the number of grades that is not null
+
+        for (Double grade : assignment.getGrades())
+            if (grade != null) {
+                mean += grade;
+                count++;
+            }
+
+        return (count == 0) ? null : mean / count;
+    }
+
+    /**
+     * Calculates the final grade of a student, which equals the weighted sum of
+     * each assignment
+     *
+     * @param student the student
+     * @return the final grade of a student
+     */
+    public Double calcStudentFinalGrade(Student student) {
+        double finalGrade = 0;
+        Double grade;
+
+        // step 1: find the index of the student
+        int idx = students.indexOf(student);
+
+        // step 2: go through all assignments and check the grade for that specific student
+        for (Assignment assignment : assignments) {
+            grade = assignment.getGrades().get(idx);
+            if (grade == null)
+                grade = 0.0;
+            finalGrade += grade * assignment.getWeight();
+        }
+
+        return finalGrade;
+    }
+
+    /**
+     * Exports the scores for the course to a .csv file
+     */
+    public void exportScores() {
+        // step 1
+        File file = new File(String.format("%s.csv", name));
+
+        // Step 2
+        try ( FileWriter fw = new FileWriter(file)) {
+            String str = "";
+
+            // header
+            str += String.format("%s,%s,", "Fname", "Lname");
+//            for (int i = 0; i < assignments.size(); i++)
+//                str += String.format("A%02d,", i);
+
+            for (Assignment assignment : assignments)
+                str += String.format("%s,", assignment.getId());
+
+            str += "FinalGrade\n";
+
+            // scores for all students
+            for (int i = 0; i < students.size(); i++) {
+                // extract the name for a student
+                str += String.format("%s,%s,",
+                        students.get(i).getFname(), students.get(i).getLname());
+
+                // extract scores of each assignment for a student
+                for (Assignment assignment : assignments)
+                    str += String.format("%.1f,", assignment.getGrades().get(i));
+
+                str += String.format("%.1f\n", calcStudentFinalGrade(students.get(i)));
+            }
+
+            // mean for each assignment
+            str += "Mean,,";            // A cell of "Mean" and an empty cell
+            for (Assignment assignment : assignments)
+                str += String.format("%.1f,", calcAssignmentMean(assignment));
+            str += "\n";
+
+            // Step 3
+            fw.write(str);
+
+        } catch (IOException e) {
+        }
+    }
+
+    /**
+     * Generates random scores for the course
+     */
+    public void generateRandomGrade() {
+        for (Assignment assignment : assignments)
+            for (int i = 0; i < assignment.getGrades().size(); i++)
+                assignment.getGrades().set(i, Math.random() * 50 + 50);   // [50, 100)
+        SimpleSchoolSystem.serializeALlData();
     }
 
     @Override

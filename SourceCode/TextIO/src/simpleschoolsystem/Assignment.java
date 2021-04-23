@@ -25,6 +25,8 @@ package simpleschoolsystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A simple class of Assignment
@@ -38,11 +40,11 @@ public class Assignment implements Serializable {
     private double weight;          // 0.05 means 5%
     private ArrayList<Double> grades;
 
-    public Assignment(String id, String title, double weight, ArrayList<Double> grades) {
-        this.id = id;
+    public Assignment(Course course, String title, double weight) {
+        this.id = course.generateAssignmentId();
         this.title = title;
         this.weight = weight;
-        this.grades = grades;
+        this.grades = new ArrayList(Arrays.asList(new Double[course.getStudents().size()]));
     }
 
     @Override

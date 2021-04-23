@@ -31,13 +31,17 @@ public class Test {
 
     public static void main(String[] args) {
         SimpleSchoolSystem.initData();
-        Student s1 = new Student(SimpleSchoolSystem.generateID('s'), "Yi", "Wang", "male");
+        Student s1 = new Student("Yi", "Wang", "male");
+        Student s2 = new Student("Lucy", "Chen", "female");
+        Student s3 = new Student("Micheal", "Black", "male");
         SimpleSchoolSystem.addStudent(s1);
-        Teacher t1 = new Teacher(SimpleSchoolSystem.generateID('t'), "Jon", "Snow", "male");
-        Teacher t2 = new Teacher(SimpleSchoolSystem.generateID('t'), "Mike", "Conna", "male");
+        SimpleSchoolSystem.addStudent(s2);
+        SimpleSchoolSystem.addStudent(s3);
+        Teacher t1 = new Teacher("Jon", "Snow", "male");
+        Teacher t2 = new Teacher("Mike", "Conna", "male");
         SimpleSchoolSystem.addTeacher(t1);
         SimpleSchoolSystem.addTeacher(t2);
-        Course c1 = new Course("C0001", "Programing 1");
+        Course c1 = new Course("Programing 1");
         SimpleSchoolSystem.addCourse(c1);
 
 //        System.out.println(students);
@@ -45,9 +49,24 @@ public class Test {
 //        System.out.println(courses);
         s1.registerCourse(c1);      // 0
         s1.registerCourse(c1);      // 1
+        s2.registerCourse(c1);      // 1
+        s3.registerCourse(c1);      // 1
+
         t1.registerCourse(c1);      // 0
         t1.registerCourse(c1);      // 1
         t2.registerCourse(c1);      // 2
+
+        Assignment a1 = new Assignment(c1, "Assignment01", 0.2);
+        Assignment a2 = new Assignment(c1, "Assignment02", 0.2);
+        Assignment a3 = new Assignment(c1, "Exam01", 0.3);
+        Assignment a4 = new Assignment(c1, "Exam02", 0.3);
+        t1.getCourses().get(0).addAssignment(t1, a1);
+        t1.getCourses().get(0).addAssignment(t1, a2);
+        t1.getCourses().get(0).addAssignment(t1, a3);
+        t1.getCourses().get(0).addAssignment(t1, a4);
+
+        c1.generateRandomGrade();
+        c1.exportScores();
 //        System.out.println(students);
 //        System.out.println(teachers);
 //        System.out.println(courses);

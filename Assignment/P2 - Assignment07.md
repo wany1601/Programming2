@@ -52,7 +52,7 @@ Create a class of `Dog` that extends from `Animal`, with
 1. Additional Data Member 
    1. `String suitFor`				// "apartment" or "house"
 2. Additional Methods
-   1. constructor with `name`, `gender`, `age` and `longFur`
+   1. constructor with `name`, `gender`, `age` and `suitFor`
    2. `hashCode` and `equals`
    3. `toString`
    4. getters and setters 

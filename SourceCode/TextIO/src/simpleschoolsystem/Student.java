@@ -35,8 +35,8 @@ public class Student extends Person implements Serializable {
 
     private ArrayList<Course> courses;
 
-    public Student(String id, String fname, String lname, String gender) {
-        super(id, fname, lname, gender);
+    public Student(String fname, String lname, String gender) {
+        super(SimpleSchoolSystem.generateID('s'), fname, lname, gender);
         this.courses = new ArrayList<>();
     }
 
@@ -53,6 +53,11 @@ public class Student extends Person implements Serializable {
 
         courses.add(course);                // add the course on the student side
         course.getStudents().add(this);     // add the student on the course side
+
+        // goes through all assignments of that course, and expand the size of grades by 1
+        for (Assignment assignment : course.getAssignments())
+            assignment.getGrades().add(null);
+
         SimpleSchoolSystem.serializeALlData();      // serialize all data
         return 0;               // register successfully
     }

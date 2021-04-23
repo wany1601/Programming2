@@ -25,6 +25,7 @@ package simpleschoolsystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple class of Teacher
@@ -35,8 +36,8 @@ public class Teacher extends Person implements Serializable {
 
     private ArrayList<Course> courses;
 
-    public Teacher(String id, String fname, String lname, String gender) {
-        super(id, fname, lname, gender);
+    public Teacher(String fname, String lname, String gender) {
+        super(SimpleSchoolSystem.generateID('t'), fname, lname, gender);
         this.courses = new ArrayList<>();
     }
 
@@ -58,6 +59,30 @@ public class Teacher extends Person implements Serializable {
         course.setTeacher(this);            // set myself as the teacher of the course
         SimpleSchoolSystem.serializeALlData();      // serialize all data
         return 0;               // register successfully
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + super.hashCode();
+        hash = 37 * hash + Objects.hashCode(this.courses);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Teacher other = (Teacher) obj;
+        if (!super.equals(other))
+            return false;
+        if (!Objects.equals(this.courses, other.courses))
+            return false;
+        return true;
     }
 
     @Override
