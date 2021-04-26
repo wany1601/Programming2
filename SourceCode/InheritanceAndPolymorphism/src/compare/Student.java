@@ -23,9 +23,11 @@
  */
 package compare;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
+ * A simple Student class
  *
  * @author Yi Wang
  */
@@ -51,7 +53,7 @@ public class Student implements Comparable<Student> {       // implement the int
     @Override
     public int compareTo(Student student) {
 //        return student.age - this.age;              // descending
-//        return this.age - student.age;              // asscending
+//        return this.age - student.age;              // ascending
         return this.fname.compareTo(student.fname);
     }
 
@@ -90,7 +92,8 @@ public class Student implements Comparable<Student> {       // implement the int
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", fname=" + fname + ", lname=" + lname + ", age=" + age + ", gender=" + gender + '}';
+        return "Student{" + "id=" + id + ", fname=" + fname + ", lname=" + lname
+                + ", age=" + age + ", gender=" + gender + '}';
     }
 
     public String getId() {
@@ -131,6 +134,53 @@ public class Student implements Comparable<Student> {       // implement the int
 
     public void setGender(char gender) {
         this.gender = gender;
+    }
+
+    /**
+     * A Comparator to compare two students based on their ages, then fname,
+     * then lname
+     */
+    public static class AgeComparator implements Comparator<Student> {
+
+        @Override
+        public int compare(Student s1, Student s2) {
+            return (s1.age - s2.age) * 10000
+                    + s1.fname.compareTo(s2.fname)
+                    + s1.lname.compareTo(s2.lname);
+        }
+
+    }
+
+    /**
+     * A Comparator to compare two students based on their fname, then lname,
+     * then id
+     */
+    public static class NameComparator implements Comparator<Student> {
+
+        @Override
+        public int compare(Student s1, Student s2) {
+            // return heavy_weight * A + B
+            return s1.fname.compareTo(s2.fname) * 10000
+                    + s1.lname.compareTo(s2.lname) * 100
+                    + s1.id.compareTo(s2.id);
+        }
+
+    }
+
+    /**
+     * A Comparator to compare two students based on their gender, then fname,
+     * then lname, then id
+     */
+    public static class GenderComparator implements Comparator<Student> {
+
+        @Override
+        public int compare(Student s1, Student s2) {
+            return (s1.gender - s2.gender) * 1000000
+                    + s1.fname.compareTo(s2.fname) * 10000
+                    + s1.lname.compareTo(s2.lname) * 100
+                    + s1.id.compareTo(s2.id);
+        }
+
     }
 
 }
