@@ -31,10 +31,13 @@ import java.awt.event.KeyEvent;
  */
 public class WeightConvertor extends javax.swing.JFrame {
 
+    private Menu menu;  // -> pointting at the menu page
+
     /**
      * Creates new form WeightConvertor
      */
-    public WeightConvertor() {
+    public WeightConvertor(Menu menu) {
+        this.menu = menu;
         initComponents();
     }
 
@@ -50,13 +53,14 @@ public class WeightConvertor extends javax.swing.JFrame {
         modeBG = new javax.swing.ButtonGroup();
         titleL = new javax.swing.JLabel();
         inputUnitL = new javax.swing.JLabel();
-        intputTF = new javax.swing.JTextField();
+        inputTF = new javax.swing.JTextField();
         equalL = new javax.swing.JLabel();
         outputL = new javax.swing.JLabel();
         outputUnitL = new javax.swing.JLabel();
         submitB = new javax.swing.JButton();
         kg2LbRB = new javax.swing.JRadioButton();
         lb2KgRB = new javax.swing.JRadioButton();
+        inputSL = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("weight converter");
@@ -71,9 +75,9 @@ public class WeightConvertor extends javax.swing.JFrame {
 
         inputUnitL.setText("kg");
 
-        intputTF.addKeyListener(new java.awt.event.KeyAdapter() {
+        inputTF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                intputTFKeyReleased(evt);
+                inputTFKeyReleased(evt);
             }
         });
 
@@ -105,6 +109,18 @@ public class WeightConvertor extends javax.swing.JFrame {
             }
         });
 
+        inputSL.setMajorTickSpacing(25);
+        inputSL.setMinorTickSpacing(5);
+        inputSL.setPaintLabels(true);
+        inputSL.setPaintTicks(true);
+        inputSL.setToolTipText("");
+        inputSL.setValue(0);
+        inputSL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inputSLStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,7 +134,7 @@ public class WeightConvertor extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(intputTF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inputTF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(inputUnitL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -126,15 +142,19 @@ public class WeightConvertor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(outputL, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(outputUnitL)
-                                .addGap(0, 24, Short.MAX_VALUE))
+                                .addComponent(outputUnitL))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(kg2LbRB)
                                     .addComponent(lb2KgRB))
-                                .addGap(24, 24, 24)))
-                        .addComponent(submitB)
-                        .addGap(118, 118, 118)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(submitB)
+                                        .addGap(55, 55, 55))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(inputSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,16 +167,22 @@ public class WeightConvertor extends javax.swing.JFrame {
                     .addComponent(outputL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(outputUnitL)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(intputTF, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputTF, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(equalL)
                         .addComponent(inputUnitL)))
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(kg2LbRB)
-                    .addComponent(submitB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb2KgRB)
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(inputSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb2KgRB)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitB)
+                        .addGap(28, 28, 28))))
         );
 
         pack();
@@ -179,7 +205,7 @@ public class WeightConvertor extends javax.swing.JFrame {
         String result = "";
         try {
             // read from the textfield
-            double input = Double.parseDouble(intputTF.getText());
+            double input = Double.parseDouble(inputTF.getText());
 
             // conversion
             if (kg2LbRB.isSelected())
@@ -221,14 +247,28 @@ public class WeightConvertor extends javax.swing.JFrame {
      *
      * @param evt the event
      */
-    private void intputTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_intputTFKeyReleased
+    private void inputTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTFKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             convertWeight();
-    }//GEN-LAST:event_intputTFKeyReleased
+    }//GEN-LAST:event_inputTFKeyReleased
 
+    /**
+     * Set the menu frame visible
+     *
+     * @param evt the closing event
+     */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        menu.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    /**
+     * update the input textfield when the slider value gets changed
+     *
+     * @param evt the slider statechanged event
+     */
+    private void inputSLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inputSLStateChanged
+        inputTF.setText(inputSL.getValue() + "");
+    }//GEN-LAST:event_inputSLStateChanged
 
     /**
      * converts kg to lb
@@ -254,8 +294,9 @@ public class WeightConvertor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel equalL;
+    private javax.swing.JSlider inputSL;
+    private javax.swing.JTextField inputTF;
     private javax.swing.JLabel inputUnitL;
-    private javax.swing.JTextField intputTF;
     private javax.swing.JRadioButton kg2LbRB;
     private javax.swing.JRadioButton lb2KgRB;
     private javax.swing.ButtonGroup modeBG;

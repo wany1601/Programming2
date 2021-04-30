@@ -96,7 +96,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void weightBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weightBActionPerformed
-        new WeightConvertor().setVisible(true);
+        new WeightConvertor(this).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_weightBActionPerformed
 
     /**
