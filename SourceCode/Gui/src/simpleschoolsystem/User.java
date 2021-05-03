@@ -23,15 +23,16 @@
  */
 package simpleschoolsystem;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Yi Wang
  */
-public class User {
+public abstract class User implements Serializable {
 
-    private String userName;
+    private String userName;            // `s` for student, `t` for teacher
     private String password;
     private String fname;
     private String lname;

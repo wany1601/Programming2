@@ -77,7 +77,7 @@ public class SchoolSystem {
             ObjectInputStream ois = new ObjectInputStream(fis);
             object = ois.readObject();
         } catch (Exception e) {
-            System.out.println("!!!!!");
+            System.out.println(e);
         }
 
         return object;

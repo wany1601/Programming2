@@ -23,6 +23,8 @@
  */
 package simpleschoolsystem;
 
+import java.awt.Color;
+
 /**
  *
  * @author Yi Wang
@@ -76,6 +78,11 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordL.setText("password:");
 
         loginB.setText("Login");
+        loginB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBActionPerformed(evt);
+            }
+        });
 
         singUpB.setText("Sign Up");
         singUpB.addActionListener(new java.awt.event.ActionListener() {
@@ -243,16 +250,52 @@ public class LoginFrame extends javax.swing.JFrame {
         String fname = fnameTF.getText();
         String lname = lnameTF.getText();
 
-        User user = new User(userName, password, fname, lname);
+        User user;
 
-        if (SchoolSystem.users.contains(user))
-            // print an error message
-            signUpMessageL.setText("The user name is used, please change another one");
+        // if the userName starts with s, then it is a student
+        // if the userName starts with t, then it is a teacher
+        if (userName.charAt(0) == 's')
+            user = new Student(userName, password, fname, lname);
+//        else if (userName.charAt(0) == 't')
+//            user = new Teacher(userName, password, fname, lname);
         else {
+            signUpMessageL.setForeground(Color.RED);
+            signUpMessageL.setText("The syntax of the username is incorrect.");
+            return;
+        }
+
+        if (SchoolSystem.users.contains(user)) {
+            // print an error message
+            signUpMessageL.setForeground(Color.RED);
+            signUpMessageL.setText("The user name is used, please change another one");
+        } else {
             SchoolSystem.users.add(user);
             SchoolSystem.serializeData("users.ser", SchoolSystem.users);
+            signUpMessageL.setForeground(Color.GREEN);
+            signUpMessageL.setText("New user generated successfully");
         }
     }//GEN-LAST:event_submitBActionPerformed
+
+    /**
+     * checks for the login
+     *
+     * @param evt the login button event
+     */
+    private void loginBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBActionPerformed
+        String inputUserName = userTF.getText();
+        String password = passwordTF.getText();
+
+        for (User existUser : SchoolSystem.users)
+            if (existUser.getUserName().equals(inputUserName)
+                    && existUser.getPassword().equals(password)) {
+                // valid, jump to the new frame which contains the user's infor
+                new homeFrame(existUser).setVisible(true);
+                this.setVisible(false);
+                return;
+            }
+
+        loginMessageL.setText("Your account or password is not correct");
+    }//GEN-LAST:event_loginBActionPerformed
 
     /**
      * @param args the command line arguments
